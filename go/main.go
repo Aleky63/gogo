@@ -1,147 +1,96 @@
-// package main
-
-// import (
-//     "bufio"
-//     "fmt"
-//     "math/rand"
-//     "os"
-//     "strconv"
-//     "strings"
-//     "time"
-// )
-
-// // Генерация случайного числа от min до max (включительно)
-// func getRandomNumber(min, max int) int {
-//     return rand.Intn(max-min+1) + min
-// }
-
-// // Получение ввода от пользователя
-// func getUserInput(scanner *bufio.Scanner) string {
-//     scanner.Scan()
-//     return scanner.Text()
-// }
-
-// // Основная функция игры
-// func playGame() {
-//     rand.Seed(time.Now().UnixNano()) // Инициализируем рандомизатор
-
-//     target := getRandomNumber(1, 100) // Загадываем число
-//     var guess int
-//     var err error
-//     attempts := 0
-
-//     fmt.Println("Компьютер загадал случайное число от 1 до 100 включительно. Угадайте его!")
-
-//     scanner := bufio.NewScanner(os.Stdin)
-
-//     for {
-//         fmt.Print("Ваше предположение (либо, для завершения, введите слово выход): ")
-//         input := getUserInput(scanner)
-//         input = strings.TrimSpace(input)
-
-//         if input == "выход" {
-//             fmt.Println("\nВы вышли из игры.")
-//             return
-//         }
-
-//         guess, err = strconv.Atoi(input)
-//         if err != nil {
-//             fmt.Println("Пожалуйста, введите корректное число или слово 'выход'.")
-//             continue
-//         }
-
-//         if guess < 1 || guess > 100 {
-//             fmt.Println("Число вне диапазона. Введите число от 1 до 100.")
-//             continue
-//         }
-
-//         attempts++
-
-//         if guess < target {
-//             fmt.Println("Загаданное число больше.")
-//         } else if guess > target {
-//             fmt.Println("Загаданное число меньше.")
-//         } else {
-//             fmt.Printf("Правильно! Вы угадали число с %d попытки.\n", attempts)
-//             break
-//         }
-//     }
-
-//     // Предлагаем сыграть снова
-//     fmt.Print("Хотите сыграть еще раз? (если хотите, напишите слово да): ")
-//     response := getUserInput(scanner)
-//     if strings.ToLower(strings.TrimSpace(response)) == "да" {
-//         playGame()
-//     } else {
-//         fmt.Println("Спасибо за игру! До свидания!")
-//     }
-// }
-
-// func main() {
-//     playGame()
-// }
-
 package main
 
 import (
 	"errors"
 	"fmt"
 	"math/rand"
+	"os"
 	"strconv"
+	"strings"
 )
 
-var ErrUserEndGame =errors.New("user ehd game")
-
+var ErrUserEndGame = errors.New("user ehd game")
 
 func generateRandomNumber(min,max int) int{
-    return rand.IntN(max-min +1)+ min
-
+    return rand.Intn(max-min +1)+ min
 }
 
-
-
-func getUserInput(min,max int) int{
+func getUserInput(min, max int) (int,error){
     var input string
     fmt.Printf("Ваше предположение (либо, для завершения, введите слово выход):")
-fmt.Sscanln(&input)
+fmt.Scanln(&input)
 
-
-if string.ToLower(input) == "выход" {
+if strings.ToLower(input) == "выход" {
     return 0, ErrUserEndGame
 }
 number, err := strconv.Atoi((input))
 if err != nil {
    return 0, fmt.Errorf("invalid input: %w", err) 
 }
+
+if number < min || number > max {
+        return 0, fmt.Errorf("число должно быть в диапазоне от %d до %d", min, max)
+    }
+
 return number, nil
 }
 
-func playGame(){
+func playGame() error {
     min := 1
     max := 100
    randomNumber := generateRandomNumber(min, max)
-   fmt.Println("Компьютер загадал случайное число от 1 до 100 включительно. Угадайте его!")
+   attempts := 0
+   
+   
+
+
+fmt.Println("Компьютер загадал случайное число от 1 до 100 включительно. Угадайте его!")
 
    for {
-    input, err := getUserInput()
+    input, err := getUserInput(min,max)
     if err !=nil{
-        fmt.Println(err)
-        return
+        if err == ErrUserEndGame{
+            return  err
+} 
+fmt.Println("Неккоректное число")
+continue
+        }    
+     attempts++   
+    
+    if input < randomNumber {
+         fmt.Println("Загаданное число больше.")
+    } else if input > randomNumber{
+fmt.Println("Загаданное число меньше.")
+    } else {
+       fmt.Printf("Правильно! Вы угадали число с %d попытки.\n", attempts) 
+       break
     }
-    fmt.Println(input)
    }
+ return nil
 }
 
+func printGameEnd(){
+   fmt.Println("Спасибо за игру! До свидания!") 
+}
 
-func main (){
-   for{
-    playGame()
+func main () {
+   for {
+    if err := playGame(); err != nil  {
+        if err == ErrUserEndGame {
+            printGameEnd()
+            break   
+        }
+fmt.Printf("Возникла ошибка во время игры: %v", err)
+os.Exit(1)     
+    }
+
     var playAgain string
     fmt.Println("Хотите сыграть еще раз? (если хотите, напишите слово да): нет")
     fmt.Scanln(&playAgain)
     if playAgain != "да"{
-        fmt.Println("Спасибо за игру! До свидания!")
+    printGameEnd()
         break
     }
    }
+  
 }
