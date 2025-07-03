@@ -3,7 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
-	"math/rand"
+	"math/rand/v2"
 	"os"
 	"strconv"
 	"strings"
@@ -12,7 +12,7 @@ import (
 var ErrUserEndGame = errors.New("user ehd game")
 
 func generateRandomNumber(min,max int) int{
-    return rand.Intn(max-min +1)+ min
+    return rand.IntN(max-min +1)+ min
 }
 
 func getUserInput(min, max int) (int,error){
@@ -41,8 +41,6 @@ func playGame() error {
    randomNumber := generateRandomNumber(min, max)
    attempts := 0
    
-   
-
 
 fmt.Println("Компьютер загадал случайное число от 1 до 100 включительно. Угадайте его!")
 
