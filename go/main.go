@@ -1,15 +1,36 @@
 package main
 
-import "fmt"
-func main() {
-	nums :=[15]int{1:87, 6:66, 7:2,8:11}
-	fmt.Println(nums[6])
+import (
+	"fmt"
+	"strings"
+)
 
-	i:=4
-	fmt.Println(len(nums))
-	if i >=0 && i <=len(nums){
-		fmt.Println(nums[i])
-	} else {
-		fmt.Printf("Значение %d выходит за пределы [от 0 до %d]\n", i, len(nums)-1)
+
+
+// func SumNeighbors(arr [10]int)(newArr [10]int) { 
+
+// newArr = [10]int{}
+// newArr[0],newArr[9] = arr[1], arr[8]
+
+// for i := 1; i < len(arr)-1; i++ {
+// 	newArr[i] = arr[i-1] + arr[i+1]
+// }
+// return 
+// }
+
+func SumNeighbors(arr [10]int)(newArr [10]int) { 
+
+for i := range arr {
+	switch{
+	case i == 0:
+		newArr[0] = arr[1]
+	case i == 9:
+		newArr[9] = arr[8]
+	 default:
+			newArr[i] = arr[i-1] + arr[i+1]
 	}
+  }
+return
 }
+
+
