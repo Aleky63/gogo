@@ -29,7 +29,7 @@ func main() {
     fmt.Println(result)
     
     // Проверим каждый элемент
-    fmt.Println("\nПодробно:")
+    fmt.Println("\nПодро55бно:")
     for i, val := range result {
         switch {
         case i == 0:

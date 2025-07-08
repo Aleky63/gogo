@@ -28,7 +28,7 @@ func generateCode(arr [7]int) string {
 
     var middle string
     for _, v := range arr {
-        prefix := "O"
+        prefix := "OO"
         if v%2 == 0 {
             prefix = "E+/+E"
         }
