@@ -142,7 +142,7 @@ func DisplayResults( letBigs, letSmalls, digits, spaces, punctuation int){
 	fmt.Printf("Spaces count: %d\n", spaces)
 	fmt.Printf("Punctuation count: %d\n", punctuation)
   }
-func main(){
+func main19(){
     text, err := GetInput()
 
 	if err != nil {

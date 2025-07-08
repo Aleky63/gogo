@@ -16,7 +16,7 @@ func SumNeighbors(arr [10]int) (newArr [10]int) {
     return
 }
 
-func main() {
+func main23() {
     // Пример массива
     arr := [10]int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
     

@@ -1,7 +1,7 @@
 package main
 
 import (
-    "fmt"
+	"fmt"
 )
 
 func printDiamond(n int) {
@@ -47,6 +47,6 @@ func printDiamond(n int) {
     }
 }
 
-func main() {
+func main17() {
     printDiamond(9)
 }

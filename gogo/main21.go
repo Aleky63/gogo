@@ -23,7 +23,7 @@ if isPal {
 }
 
 
-func main() {
+func main21() {
     
     nums := [10]int{}
     isPalindrome(nums) 

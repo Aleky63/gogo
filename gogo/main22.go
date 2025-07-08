@@ -5,27 +5,27 @@ import (
 	"strings"
 )
 
+func CountVowelsInArray(arr [3]string) {
+    vowels := "аеёиоуыэюяАЕЁИОУЫЭЮЯ"
+    results := make([]int, 3)
 
+    for i, str := range arr {
+        count := 0
+        for _, char := range str {
+            if strings.ContainsRune(vowels, char) {
+                count++
+            }
+        }
+        results[i] = count // Присваиваем результат
+    }
 
-func CountVowelsInArray(arr [3]string){ 
-
-vowels := "аеёиоуыэюяАЕЁИОУЫЭЮЯ"
-results := make([]int, 3)
-
-for i, str := range arr {
-	count := 0
-
-	for _,char  := range str{
-		if strings.ContainsRune(vowels, char) {
-				count++
-			}
-	}
-
-results[i] =
-}
-	fmt.Printf("%d %d %d\n", results[0], results[1], results[2])
+    fmt.Printf("%d %d %d\n", results[0], results[1], results[2])
 }
 
+func main22() {
+    arr := [3]string{"Привет", "Счастье", "Мир"}
+    CountVowelsInArray(arr)
+}
 // func CountVowelsInArray(arr [3]string) {
 // 	for i := 0; i < len(arr); i++ {
 // 		count := 0

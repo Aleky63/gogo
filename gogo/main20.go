@@ -1,7 +1,7 @@
 package main
 
 import "fmt"
-func main() {
+func main20() {
 	nums :=[15]int{1:87, 6:66, 7:2,8:11}
 	fmt.Println(nums[6])
 

@@ -70,7 +70,7 @@ func printGameEnd(){
    fmt.Println("Спасибо за игру! До свидания!") 
 }
 
-func main () {
+func main18 () {
    for {
     if err := playGame(); err != nil  {
         if err == ErrUserEndGame {
