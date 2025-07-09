@@ -1,11 +1,7 @@
-
-
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 )
 
 func PrintReplaced(str string){
@@ -18,4 +14,10 @@ func PrintReplaced(str string){
 	}
 	fmt.Println()
 
+}
+func main14() {
+    
+    testStr := "Привет, улыбка!"
+    
+    PrintReplaced(testStr)
 }

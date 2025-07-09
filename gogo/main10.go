@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main() {
+func main10() {
 	score, err := getScore()
 	if err != nil {
 		fmt.Println(err)

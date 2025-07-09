@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func main(){
+func main7(){
 	add := adder(11)
 	fmt.Println(add(5))
 	fmt.Println(add(5))

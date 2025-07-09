@@ -1,14 +1,13 @@
 package main
 
 import (
-    "fmt"
-    "io"
-    "os"
-    "regexp"
-    "strconv"
-    "strings"
+	"fmt"
+	"io"
+	"os"
+	"strconv"
+	"strings"
 
-    "math/rand/v2"
+	"math/rand/v2"
 )
 
 // rollDice симулирует броски двух кубиков до получения целевой суммы
@@ -55,7 +54,7 @@ func rollDice(targetSum int) {
     }
 }
 
-func main() {
+func main13() {
     content, err := io.ReadAll(os.Stdin)
     if err != nil {
         panic(err)

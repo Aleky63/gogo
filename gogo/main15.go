@@ -45,7 +45,7 @@ func play() int {
 	// fallback, по условиям этого не должно быть
 	return low
 }
-func main() {
+func main15() {
 	result := play()
 	if result == -1 {
 		fmt.Println("Не удалось угадать число за 6 попыток")

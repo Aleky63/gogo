@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-func main() {
+func main3() {
 
 var weight, height float64
 

@@ -2,39 +2,30 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"math/rand"
+	"time"
 )
 
-func main() {
-	arr := [7]int{1, 9, 6, 3, 1, 9, 8}
-	fmt.Println("Cекретный код:", func() string {
-	
-		return generateCode(arr)
-	}())
-
+func init() {
+    rand.Seed(time.Now().UnixNano()) // Инициализация генератора случайных чисел
 }
 
-func generateCode(arr [7]int) string {
-	min := arr[0]
-    max := arr[0]
-     for _, v := range arr {
-        if v < min {
-            min = v
-        }
-        if v > max {
-            max = v
-        }
+func generateCompliment(name string) string {
+    number := rand.Intn(3) // Генерируем число от 0 до 2
+    var res string
+
+    switch number {
+    case 0:
+        res = "Ты великолепен,"
+    case 1:
+        res = "У тебя потрясающая улыбка,"
+    case 2:
+        res = "Ты вдохновляешь,"
     }
 
-    var middle string
-    for _, v := range arr {
-        prefix := "OO"
-        if v%2 == 0 {
-            prefix = "E+/+E"
-        }
-        middle += prefix + strconv.Itoa(v) 
-    }
+    return fmt.Sprintf("%s %s!", res, name)
+}
 
-    
-    return strconv.Itoa(min)  + middle +  strconv.Itoa(max)
+func main() {
+    fmt.Println(generateCompliment("Анна"))
 }

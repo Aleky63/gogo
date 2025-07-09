@@ -19,7 +19,7 @@ func printTable(num int) {
     }
 }
 
-func main() {
+func main16() {
     scanner := bufio.NewScanner(os.Stdin)
     scanner.Scan()
     num, _ := strconv.Atoi(scanner.Text())

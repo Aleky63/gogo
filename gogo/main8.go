@@ -21,7 +21,7 @@ func isWeekend(d Day) bool {
 	return d == 6 || d == 7
 }
 
-func main(){
-  fmt.Println(isWeekend())
+func main8(){
+  fmt.Println(isWeekend(Saturday))
 }
 

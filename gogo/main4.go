@@ -5,7 +5,7 @@ import (
 	"os"
 )
 
-func main() {
+func main4() {
 
 var input int
 fmt.Println("Введите время в часах (0-23): ")
