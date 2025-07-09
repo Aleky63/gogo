@@ -1,31 +1,26 @@
 package main
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
-)
+import "fmt"
 
-func init() {
-    rand.Seed(time.Now().UnixNano()) // Инициализация генератора случайных чисел
+func main(){
+
+// slice := []int{1, 9, 6, 3, 19, 8}
+// fmt.Printf("slice: %v, len: %d, cap: %d\n", slice, len(slice),cap(slice))
+
+
+slice := make([]int, 5, 5)
+fmt.Printf("slice: %v, len: %d, cap: %d\n", slice, len(slice),cap(slice))
+
+slice2 := make([]int, 5, 10)
+fmt.Printf("slice2: %v, len: %d, cap: %d\n", slice2, len(slice2),cap(slice2))
+
+slice4 := make([]int, 0)
+slice5 := make([]int, 0, 100)
+
+for i := 1; i <= 10; i++ {
+	slice4 = append(slice4, i)
+	slice5 = append(slice5, i)
+	fmt.Printf("slice4 cap: %d, slice5 cap: %d\n", cap(slice4), cap(slice5))
 }
 
-func generateCompliment(name string) string {
-    number := rand.Intn(3) // Генерируем число от 0 до 2
-    var res string
-
-    switch number {
-    case 0:
-        res = "Ты великолепен,"
-    case 1:
-        res = "У тебя потрясающая улыбка,"
-    case 2:
-        res = "Ты вдохновляешь,"
-    }
-
-    return fmt.Sprintf("%s %s!", res, name)
-}
-
-func main() {
-    fmt.Println(generateCompliment("Анна"))
 }
