@@ -4,37 +4,27 @@ import "fmt"
 
 
 
-func printMagic(nums[]int){
-n:=len(nums)
-
-if n == 0 {
-		fmt.Println("[]")
-		return
+func SumSlices(s1, s2 []int) []int{
+min :=len(s1)
+if len(s2) < min {
+	min = len(s2)
 }
-	result := make([]int, n)
 
+res :=make([]int, min)
 
-for i := range n {
-		multiply := 1
-		for j := range n {
-			if i != j {
-				multiply *= nums[j]
-			}
-		}
-		result[i] = multiply
-	}
+for i := range min {
+	res[i] = s1[i] + s2[i]
+}
 
-	fmt.Print("[")
-	for i, val := range result {
-		if i > 0 {
-			fmt.Print(", ")
-		}
-		fmt.Print(val)
-	}
-	fmt.Println("]")
+return res
 }
 
 func main(){
-		nums := []int{1,2,3,4,5}
-	printMagic(nums)
+	s1 := []int{1, 2, 3, 4, 5, 6}
+	s2 := []int{10, 20, 30, 40}
+	
+ sums:= SumSlices(s1 ,s2)
+ 	fmt.Println("Результат:", sums)
 }
+
+
