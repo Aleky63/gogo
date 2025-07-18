@@ -1,46 +1,34 @@
 package main
 
 import (
-	
 	"fmt"
 )
 
 
+ func replaceEvenOnEvenIndices(slice [][]int) [][]int{
+	result := make([][]int, len(slice))
 
-func Max(nums []int) (int, error){
-	if nums == nil || len (nums) == 0 {
-	  return 0, fmt.Errorf("slice is nil or empty")
+for i, innerSlice := range slice {
+	result[i] = make([]int, len(innerSlice))
+   for j , v := range innerSlice {
+	if j%2 == 0 && v%2 == 0 { 
+		result [i][j] = 0
+	  }	else {
+		result[i][j] = v
+			}
+	}	
 }
+return result
+ }
 
-max := nums[0]
-
-
-for i := range nums {
-	if nums[i]>max {
-		max = nums[i]
-	}
+func main ()  {
+s := [][]int{
+		{1, 2, 3, 4},
+		{5, 6, 7, 8},
+		{9, 10, 11, 12},
+}
+res := replaceEvenOnEvenIndices(s)
 	
-}
-return max, nil
-}
 
-func main() {
-	// Тестовые случаи
-	testCases := [][]int{
-		{1, 3, 2, 8, 5},
-		{-10, -5, -20, -1},
-		{42},
-		{},
-		nil,
-	}
-	
-	for i, testCase := range testCases {
-		max, err := Max(testCase)
-		if err != nil {
-			fmt.Printf("Тест %d: Ошибка - %v\n", i+1, err)
-		} else {
-			fmt.Printf("Тест %d: Максимальный элемент = %d\n", i+1, max)
-		}
-	}
-}
-
+	fmt.Println(res)
+ }
