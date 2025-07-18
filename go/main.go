@@ -1,30 +1,46 @@
 package main
 
-import "fmt"
-
-
-
-func SumSlices(s1, s2 []int) []int{
-min :=len(s1)
-if len(s2) < min {
-	min = len(s2)
-}
-
-res :=make([]int, min)
-
-for i := range min {
-	res[i] = s1[i] + s2[i]
-}
-
-return res
-}
-
-func main(){
-	s1 := []int{1, 2, 3, 4, 5, 6}
-	s2 := []int{10, 20, 30, 40}
+import (
 	
- sums:= SumSlices(s1 ,s2)
- 	fmt.Println("Результат:", sums)
+	"fmt"
+)
+
+
+
+func Max(nums []int) (int, error){
+	if nums == nil || len (nums) == 0 {
+	  return 0, fmt.Errorf("slice is nil or empty")
 }
 
+max := nums[0]
+
+
+for i := range nums {
+	if nums[i]>max {
+		max = nums[i]
+	}
+	
+}
+return max, nil
+}
+
+func main() {
+	// Тестовые случаи
+	testCases := [][]int{
+		{1, 3, 2, 8, 5},
+		{-10, -5, -20, -1},
+		{42},
+		{},
+		nil,
+	}
+	
+	for i, testCase := range testCases {
+		max, err := Max(testCase)
+		if err != nil {
+			fmt.Printf("Тест %d: Ошибка - %v\n", i+1, err)
+		} else {
+			fmt.Printf("Тест %d: Максимальный элемент = %d\n", i+1, max)
+		}
+	}
+}
 
