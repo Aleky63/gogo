@@ -1,7 +1,6 @@
 package main
 
 import (
-	
 	"fmt"
 )
 
@@ -24,7 +23,7 @@ for i := range nums {
 return max, nil
 }
 
-func main() {
+func main29() {
 	// Тестовые случаи
 	testCases := [][]int{
 		{1, 3, 2, 8, 5},
