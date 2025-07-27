@@ -1,9 +1,5 @@
 // https://stepik.org/lesson/1500848/step/6?unit=1520965
 
-
-
-
-
 // package main
 
 // import (
@@ -47,7 +43,6 @@ package main
 import (
 	"fmt"
 	"slices"
-	
 )
 
 
@@ -61,13 +56,13 @@ result :=make([]int, len(slice))
    if len(result) > 0 {
  lastElement := result[len(result)-1]
 
-	if lastElement > 10 {
+	if lastElement >= 11 {
      result = result[:len(result)-1]
 	 flagLast = true
     }
 }
  
-if len(result) > 2 && cap(slice) > 5 {
+if len(result) > 2 && cap(slice) >= 4 {
     
         result = append(result[:2], result[3:]...)
 		flagIndex2 = true 
@@ -80,7 +75,7 @@ result = slices.Clip(result)
 return result
 	}
 
-func main() {
+func main33() {
 
 	slice:=[]int{1,2,3,4,5,16,19,66}
 	newSlice := DeletingFromSlice(slice)
