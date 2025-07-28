@@ -1,84 +1,65 @@
-// package main
-
-// import (
-// 	"fmt"
-// 	"slices"
-// )
-
-// func main(){
-// 	slice := []int{1,2,3,4,5}
-// 	fmt.Println(slice)
-
-// 	slice2 :=  slice[:len(slice)-1]
-// 	fmt.Println(slice2)
-
-// 	slice3 :=  slice[1:]
-// 	fmt.Println(slice3)
-
-// 	excess := 2
-// 	slice4 :=  slice[excess+1:]
-// 	slice5 :=  slice[:excess]
-// 	slice6 := append(slice5, slice4...)
-//     fmt.Println(slice6," ", cap(slice6)," ", len(slice6))
-
-// 	slice6 = slices.Clip(slice6)
-//  fmt.Println(slice6," ", cap(slice6)," ", len(slice6))
-
-// slice2 =slice2[:len(slice2):len(slice2)]
-// fmt.Println(slice2," ", cap(slice2)," ", len(slice2))
-
-// newSlice := make([]int, len(slice6))
-// copy(newSlice, slice6)
-// 	 fmt.Println(newSlice," ", cap(newSlice)," ", len(newSlice))
-
-// 	newSlice = slices.Clip(newSlice)
-// 		 fmt.Println(newSlice," ", cap(newSlice)," ", len(newSlice))
-
-// }
-
 package main
 
 import (
 	"fmt"
-	"slices"
-	
+	"sort"
 )
 
 
-func DeletingFromSlice(slice[]int) []int{
-result :=make([]int, len(slice))
- copy(result, slice)
+func sortInner(slice []int) {
+	sort.Slice(slice, func(i, j int) bool {
+		
+		if slice[i] == 0 {
+			return true
+		}
+		if slice[j] == 0 {
+			return false
+		}
 
- flagLast := false
-    flagIndex2 := false
 
-   if len(result) > 0 {
- lastElement := result[len(result)-1]
+		isEvenI := slice[i]%2 == 0
+		isEvenJ := slice[j]%2 == 0
+		if isEvenI != isEvenJ {
+			return isEvenI
+		}
 
-	if lastElement > 10 {
-     result = result[:len(result)-1]
-	 flagLast = true
-    }
+
+		return slice[i] > slice[j]
+	})
 }
- 
-if len(result) > 2 && cap(slice) > 5 {
-    
-        result = append(result[:2], result[3:]...)
-		flagIndex2 = true 
-}
 
-if flagLast && flagIndex2 && len(result)> 0{
-	result = result[1:]
-}
-result = slices.Clip(result)
-return result
+
+func magicSort(data [][]int) {
+	
+	for _, inner := range data {
+		sortInner(inner)
 	}
 
+	
+	sort.SliceStable(data, func(i, j int) bool {
+		sum := func(s []int) int {
+			total := 0
+			for _, v := range s {
+				total += v
+			}
+			return total
+		}
+		return sum(data[i]) < sum(data[j])
+	})
+}
+
+
 func main() {
+	data := [][]int{
+		{5, 2, 0, 3, 8},
+		{1, 7, 3,22,5,66,1025 },
+		{4, 4, 4, 4}, 
+		{9, 0, 2},
+	}
 
-	slice:=[]int{1,2,3,4,5,16,19,66}
-	newSlice := DeletingFromSlice(slice)
-	  fmt.Println(newSlice)
-	  fmt.Println (cap(newSlice))
+	magicSort(data)
 
+	for _, row := range data {
+		fmt.Println(row)
+	}
 }
