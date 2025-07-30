@@ -2,64 +2,29 @@ package main
 
 import (
 	"fmt"
-	"sort"
+	"unicode/utf8"
 )
 
-
-func sortInner(slice []int) {
-	sort.Slice(slice, func(i, j int) bool {
-		
-		if slice[i] == 0 {
-			return true
-		}
-		if slice[j] == 0 {
-			return false
-		}
-
-
-		isEvenI := slice[i]%2 == 0
-		isEvenJ := slice[j]%2 == 0
-		if isEvenI != isEvenJ {
-			return isEvenI
-		}
-
-
-		return slice[i] > slice[j]
-	})
-}
-
-
-func magicSort(data [][]int) {
-	
-	for _, inner := range data {
-		sortInner(inner)
-	}
-
-	
-	sort.SliceStable(data, func(i, j int) bool {
-		sum := func(s []int) int {
-			total := 0
-			for _, v := range s {
-				total += v
-			}
-			return total
-		}
-		return sum(data[i]) < sum(data[j])
-	})
-}
-
-
 func main() {
-	data := [][]int{
-		{5, 2, 0, 3, 8, 80 ,11},
-		{1, 7, 3,22,5,66,1025,33 },
-		{4, 4, 4, 4}, 
-		{9, 0, 2},
-	}
+	str := "Зашифруй меня!"
+	encodedStr := caesarCode(str, 5, true)
+	fmt.Println(encodedStr)
 
-	magicSort(data)
-
-	for _, row := range data {
-		fmt.Println(row)
-	}
+	decodedStr := caesarCode(encodedStr, 5, false)
+	fmt.Println(decodedStr)
 }
+func caesarCode(text string, shift int32, encode bool) string{
+	result := make([]rune, 0, utf8.RuneCountInString(text	))
+for _, r := range text {
+
+	if encode {
+		result = append(result, r+shift)
+	}else{
+result = append(result, r-shift)
+	}	
+	// fmt.Println(r)
+	
+}
+return  string(result)
+}
+// https://stepik.org/lesson/1500852/step/2?unit=1520969
