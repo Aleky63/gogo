@@ -1,30 +1,69 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"unicode/utf8"
+	"log"
+	"math/rand/v2"
 )
 
 func main() {
-	str := "Зашифруй меня!"
-	encodedStr := caesarCode(str, 5, true)
-	fmt.Println(encodedStr)
+slice,err := CreateSlice(10)
 
-	decodedStr := caesarCode(encodedStr, 5, false)
-	fmt.Println(decodedStr)
+if err != nil {
+	log.Fatalf("ошибка при создании слайсаЖ %v", err)
 }
-func caesarCode(text string, shift int32, encode bool) string{
-	result := make([]rune, 0, utf8.RuneCountInString(text	))
-for _, r := range text {
+ fmt.Println(  "сгенерируемый слайс", slice)	
 
-	if encode {
-		result = append(result, r+shift)
-	}else{
-result = append(result, r-shift)
-	}	
-	// fmt.Println(r)
+
+
+ filtered := FilterSlice(slice)
+ fmt.Println("отфильтрованный слайс", filtered)	
+}
+
+
+
+
+
+func CreateSlice(n int) ([]int, error) {
+if n < 0 {
+	return nil, errors.New("negative n")
+}
+
+s:= make([]int, n)
+for i := 0; i< n; i++ {
+	s[i] =rand.IntN(21) - 10
+}
+return s, nil
+}
+
+func FilterSlice(numbers []int) []int {
+
+	filtred := []int{}
 	
-}
-return  string(result)
-}
-// https://stepik.org/lesson/1500852/step/2?unit=1520969
+	for i := 1; i < len(numbers); i++ {
+		if numbers[i-1] > numbers[i] &&
+			(numbers[i]%2 == 0 ||
+				numbers[i]%5 == 0 ||
+				numbers[i]%6 == 0 ||
+				numbers[i]%9 == 0) {
+			filtred = append(filtred, numbers[i])
+		}
+	
+	}
+	return filtred
+} 
+
+
+
+
+
+
+// func MaxSumWithNegative(numbers []int, k int) []int {
+
+// }
+
+// func SortByParity(numbers []int) []int {
+
+// }
+
