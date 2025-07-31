@@ -4,7 +4,10 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"math"
 	"math/rand/v2"
+	"slices"
+	
 )
 
 func main() {
@@ -19,11 +22,17 @@ if err != nil {
 
  filtered := FilterSlice(slice)
  fmt.Println("отфильтрованный слайс", filtered)	
+
+
+ resMax := MaxSumWithNegative(slice,3)
+ if resMax != nil{
+ fmt.Println("максимальная сумма слайс", resMax)	
+ }else{
+	 fmt.Println("нет такого слайса")	
+ }
+ sortBy := SortByParity(slice)
+fmt.Println("отсортированный слайс", sortBy)	
 }
-
-
-
-
 
 func CreateSlice(n int) ([]int, error) {
 if n < 0 {
@@ -54,16 +63,41 @@ func FilterSlice(numbers []int) []int {
 	return filtred
 } 
 
+func MaxSumWithNegative(numbers []int, k int) []int {
+maxSum := math.MinInt
+	var res []int
 
+	for i := 0; i < len(numbers)-k+1; i++ {
+		subslice := numbers[i : i+k]
+		sum := 0
+		hasNegative := false
+		for _, num := range subslice {
+			sum += num
+			if num < 0 {
+               hasNegative = true
+			 }
+		}	
+		if hasNegative && sum > maxSum{
+			maxSum = sum
+			res =  append([]int{},  subslice...)
+		}
+	}
+return res
+}
 
-
-
-
-// func MaxSumWithNegative(numbers []int, k int) []int {
-
-// }
-
-// func SortByParity(numbers []int) []int {
-
-// }
+func SortByParity(numbers []int) []int {
+	even := []int{}
+	odd := []int{}
+for _, num := range numbers {
+	if num%2 == 0 {
+		even = append(even, num)
+	}else{
+		odd = append(odd, num)
+	} 
+  }
+slices.Sort(even) 
+slices.Reverse(even)
+slices.Sort(odd)
+  return append(even, odd...)
+}
 
