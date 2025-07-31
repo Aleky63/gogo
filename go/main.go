@@ -7,7 +7,6 @@ import (
 	"math"
 	"math/rand/v2"
 	"slices"
-	
 )
 
 func main() {
@@ -17,8 +16,6 @@ if err != nil {
 	log.Fatalf("ошибка при создании слайсаЖ %v", err)
 }
  fmt.Println(  "сгенерируемый слайс", slice)	
-
-
 
  filtered := FilterSlice(slice)
  fmt.Println("отфильтрованный слайс", filtered)	
@@ -30,6 +27,7 @@ if err != nil {
  }else{
 	 fmt.Println("нет такого слайса")	
  }
+ 
  sortBy := SortByParity(slice)
 fmt.Println("отсортированный слайс", sortBy)	
 }
