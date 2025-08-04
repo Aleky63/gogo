@@ -5,7 +5,7 @@ import (
 	"unicode/utf8"
 )
 
-func main() {
+func main36() {
 	str := "Зашифруй меня!"
 	encodedStr := caesarCode(str, 5, true)
 	fmt.Println(encodedStr)

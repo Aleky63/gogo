@@ -55,3 +55,6 @@ func printMap(m map[int][]string) {
 	
 	fmt.Println("}")
 }
+
+
+// https://stepik.org/lesson/1500857/step/4?unit=1520974
