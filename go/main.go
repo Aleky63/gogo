@@ -1,57 +1,47 @@
 package main
 
 import (
-	
 	"fmt"
 	"sort"
+	"strings"
 )
 
 func main() {
-	m := map[string]int{
-    "banana":     2,
-    "apple":      1,
-    "grapefruit": 3,
-    "cherry":     1,
-  }
-  invertedMap := invertMap(m)
-  printMap(invertedMap)
+	votes1 := map[string]int{
+		"Алиса":   15,
+		"Боб":     110,
+		"Виктор":  288,
+	}
+	countVotes(votes1)
+	 fmt.Println(countVotes(votes1))
 }
 
-func invertMap(inputMap map[string]int) map[int][]string {
- inverted := make(map[int][]string)
- for key, value := range inputMap {
-        inverted[value] = append(inverted[value], key)
-    }
-	for _, strings := range inverted {
-		sort.Strings(strings)
+func countVotes(votes map[string]int ) string {
+
+if   votes == nil || len(votes) == 0  {
+		return "Кандидаты потерялись."
 	}
-    return inverted
+
+	max := 0
+	for _, v := range votes {
+		if v > max {
+     max = v
+		}		
+	}
+	
+	if max == 0{
+		return "Все голоса похищены!"
+	}
+
+var winners []string 
+for candidate, count := range votes {
+	if count == max{
+		winners =append(winners,candidate)
+	}
 }
 
-func printMap(m map[int][]string) {
-	
-	keys := make([]int, 0, len(m))
-	for key := range m {
-		keys = append(keys, key)
-	}
-	sort.Ints(keys)
-	
-	fmt.Println("{")
-		
-	for _, key := range keys {
-		values := m[key]
-		fmt.Printf("  %d: [", key)
-		
-		
-		for i, value := range values {
-			if i > 0 {
-				fmt.Print(", ")
-			}
-			fmt.Printf("\"%s\"", value)
-		}
-		
-		fmt.Println("],")
-	}
-	
-	fmt.Println("}")
+sort.Strings(winners)
+return strings.Join(winners, ", ")
 }
+
+// https://stepik.org/lesson/1500859/step/2?thread=solutions&unit=1520976
