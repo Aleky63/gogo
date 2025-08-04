@@ -1,12 +1,11 @@
 package main
 
 import (
-	
 	"fmt"
 	"sort"
 )
 
-func main() {
+func main39() {
 	m := map[string]int{
     "banana":     2,
     "apple":      1,
