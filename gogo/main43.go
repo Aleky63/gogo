@@ -5,7 +5,7 @@ import (
 	"maps"
 )
 
-func main() {
+func main43() {
 	m1 := map[string]int{
 		"a": 1,
 		"b": 2,

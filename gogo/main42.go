@@ -41,7 +41,7 @@ import (
 	"slices"
 )
 
-func main() {
+func main42() {
 	map1 := map[string][]int{
 		"a": {1, 3, 5},
 		"b": {10, 2},
