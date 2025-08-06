@@ -43,3 +43,7 @@ func mergeMaps(m1, m2 map[string]int) map[string]int {
     }
     return res;
 }
+
+
+
+// https://stepik.org/lesson/1500861/step/4?unit=1520978

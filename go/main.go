@@ -6,40 +6,77 @@ import (
 )
 
 func main() {
-	m1 := map[string]int{
-		"a": 1,
-		"b": 2,
-		"c": 3,
+	res := map[string][]int{
+		"Alice":   {1, 2},
+		"Bob":     {3, 4},
+		"Charlie": {7, 8},
+		"Dave":    {5, 1},
 	}
-
-	m2 := map[string]int{
-		"b": 10,
-		"c": 5,
-		"d": 7,
-	}
-
-	merged := mergeMaps(m1, m2)
-
-	fmt.Println(merged)
+	fmt.Println(res)
+	RemoveSlicesBySum(res)
+	fmt.Println(res)
 }
-// func mergeMaps(m1, m2 map[string]int) map[string]int {
 
-// 	res := make(map[string]int)
 
-// 	for key, v := range m1 {
-// 		res[key] = v
 
+func RemoveSlicesBySum(m map[string][]int) {
+	maps.DeleteFunc(m, func(key string, value []int) bool {
+   sum := 0
+   for _, v := range value {
+   sum += v
+
+	}
+	return sum > 6
+})
+}
+
+
+
+// func sumSlice(slice []int) int {
+// 	sum := 0
+// 	for _, num := range slice {
+// 		sum += num
 // 	}
-// 	for key, v := range m2 {
-// 		res[key] += v
-
-// 	}
-// 	return res
+// 	return sum
 // }
-func mergeMaps(m1, m2 map[string]int) map[string]int {
-    res := maps.Clone(m1);
-    for key, val := range m2 {
-        res[key] += val;
-    }
-    return res;
-}
+
+// func RemoveSlicesBySum(m map[string][]int) {
+
+// 	for k, slice := range m {
+// 		if sumSlice(slice) > 6 {
+// 			delete(m, k)
+// 		}
+// 	}
+// }
+
+// package main
+
+// import (
+// 	"fmt"
+// 	"maps"
+// 	"slices"
+// )
+
+// func main() {
+// 	m := map[string][]int{
+// 		"a": {5, 2},
+// 		"b": {15, 12},
+// 		"c": {5, 20},
+// 		"d": {1, 2},
+// 		"f": {66, 2},
+// 	}
+// 	maps.DeleteFunc(m, func(key string, value []int) bool {
+// //   for _, v := range value {
+// // 	if v ==5 {
+// // 		return true
+// // 	}
+
+// //   }
+// //   return false
+
+//  return slices.Contains(value, 5)
+
+// 	})
+// 	fmt.Print(m)
+// }
+// https://stepik.org/lesson/1500862/step/1?unit=1520979
