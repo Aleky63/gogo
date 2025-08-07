@@ -60,7 +60,7 @@ slices.SortFunc(movieNames, func(a, b string) int {
 
 }
 
-func main() {
+func main45() {
 movies := map[string]map[string]float64{
 		"Экшен": {
 			"Матрица":           8.7,
