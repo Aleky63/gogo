@@ -45,14 +45,14 @@ func mostPopularUsers(data map[string][]string) ([]string, int) {
 	maxFriends := 0
 	popularUsers := make([]string, 0)
 
-	// Первый проход: находим максимальное количество друзей
+	
 	for _, friends := range data {
 		if len(friends) > maxFriends {
 			maxFriends = len(friends)
 		}
 	}
 
-	// Второй проход: собираем пользователей с максимальным количеством друзей
+	
 	for user, friends := range data {
 		if len(friends) == maxFriends {
 			popularUsers = append(popularUsers, user)
@@ -77,10 +77,8 @@ func main() {
 		"Светлана": {"Иван", "Елена"},
 	}
 
-	// 1. Подсчет количества друзей
 	countFriends(friendsData)
 
-	// 2. Поиск общих друзей
 	user1, user2 := "Иван", "Елена"
 	common := commonFriends(friendsData, user1, user2)
 	if len(common) > 0 {
@@ -90,7 +88,7 @@ func main() {
 		fmt.Printf("У %s и %s нет общих друзей\n", user1, user2)
 	}
 
-	// 3. Поиск самых популярных пользователей
+	
 	popular, max := mostPopularUsers(friendsData)
 	fmt.Printf("Самые популярные пользователи: %s (друзей: %d)\n", 
 		strings.Join(popular, ", "), max)
