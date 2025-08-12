@@ -8,7 +8,8 @@ import (
 	"strings"
 )
 
-func main1() {
+func main() {
+	fmt.Println(os.TempDir())
 	fmt.Printf("Введите название товара")
 scanner := bufio.NewScanner(os.Stdin)
 scanner.Scan()

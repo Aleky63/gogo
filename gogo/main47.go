@@ -75,7 +75,7 @@ func totalSum(user User) int {
 }
 
 
-func main() {
+func main47() {
 	user := User{
 		Name:  "Иван Петров",
 		Phone: "+7 999 123-45-67",

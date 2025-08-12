@@ -19,7 +19,7 @@ Location: "GoogleLand",
 }
 
 
-func main() {
+func main46() {
 	
  res:= createGoEvent()
 
