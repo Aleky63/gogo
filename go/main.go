@@ -1,48 +1,55 @@
 package main
 
-import "fmt"
-type Name struct{
-	First string
-	Last string
+import (
+	"fmt"
+	"math"
+)
+
+type Student struct {
+	Name   string
+	Grades []int
 }
 
-type User struct {
-	Name Name
-	Year int
+func (s Student) AverageGrade() float64 {
+
+	if len(s.Grades) == 0 {
+		return 0
+	}
+	sum := 0
+	for _, grade := range s.Grades{
+	sum += grade	
+	}
+	 averageGrade := float64(sum)/float64(len(s.Grades))
+
+ return math.Round( averageGrade*10)/ 10
 }
 
+func (s Student) Info() string {
+// avg := s.AverageGrade()
+return fmt.Sprintf("Студент:%s, средняя оценка: %.1f.", s.Name, s.AverageGrade())
 
-func(u User) Greet() {
 
-fmt.Printf("Z %s %s %d   fdfddfdfdf.\n", u.Name.First, u.Name.Last, u.Year)
+	
 }
 
 func main() {
-	user := User {
-		Name: Name{
-			First:"AAAAAA",
-	        Last : "dddddd",
-		},
-		Year: 19999999,
-	}
-	user2 := User {
-		Name: Name{
-			First:"OOOOOO",
-	        Last : "aa",
-		},
-		Year: 99б
-	}
-
-	fmt.Printf("%+v\n", user)
-	user.Greet()
-	user.Name.First = "YYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
-	user.Greet()
-	user2.Greet()
+	user := Student {
+	Name: "Aenby",
+	Grades:[]int{5,5,5,4,5,4,5,4,5,3,5,5,5,4,5,3,5,5},
 }
+	user2 := Student {
+	Name: "Frrrrrr",
+	Grades:[]int{5,5,5,3,5,4,5,3,3,3,4},
+}
+fmt.Println (user)
+fmt.Println ( user2)
+
+fmt.Println(user.Info())
+fmt.Println(user2.Info())
 
 
 
-
+}
 
 	
 

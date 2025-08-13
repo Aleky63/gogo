@@ -142,4 +142,6 @@ func main47() {
 	expItems := expensiveItems(user)
 	fmt.Printf("Товары в корзине, где цена 10000 и более: [%s].\n", strings.Join(expItems, ", "))
 	fmt.Printf("Общая сумма покупки: %.2d руб.\n", totalSum(user))
-}
+
+	
+	// https://stepik.org/lesson/1500867/step/3?unit=1520984
