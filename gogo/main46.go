@@ -10,12 +10,12 @@ type Event struct {
 
 
 func createGoEvent() Event{
-return Event {
-
-Title: "День рождения Golang",
-Date: "10 ноября 2009",
-Location: "GoogleLand",
-   }
+    event := Event {
+	Title: "День рождения Golang",
+   Date: "10 ноября 2009",
+    Location: "GoogleLand",
+}
+	return event
 }
 
 
@@ -27,4 +27,4 @@ func main46() {
 	fmt.Printf("Событие: %s\nДата: %s\nМесто: %s\n", res.Title, res.Date, res.Location)
 }
 
-// https://stepik.org/lesson/1500866/step/4?thread=solutions&unit=1520983
+// https://stepik.org/lesson/1500866/step/4?unit=1520983
