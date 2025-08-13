@@ -32,7 +32,7 @@ return fmt.Sprintf("Студент:%s, средняя оценка: %.1f.", s.Na
 	
 }
 
-func main() {
+func main48() {
 	user := Student {
 	Name: "Aenby",
 	Grades:[]int{5,5,5,4,5,4,5,4,5,3,5,5,5,4,5,3,5,5},
