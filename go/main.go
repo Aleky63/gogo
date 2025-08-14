@@ -1,53 +1,48 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"math"
+	"math/rand"
+	"strings"
+	"time"
 )
 
-type Student struct {
-	Name   string
-	Grades []int
+type User struct {
+	FirstName         string
+	LastName          string
+	BirthYear         int
+	FavoriteLanguages []string
 }
 
-func (s Student) AverageGrade() float64 {
-
-	if len(s.Grades) == 0 {
-		return 0
+func (u User) SecretIdentity() (string, error) {
+	if u.FirstName == "" || u.LastName == "" {
+		return "", errors.New("имя или фамилия пустые")
 	}
-	sum := 0
-	for _, grade := range s.Grades{
-	sum += grade	
-	}
-	 averageGrade := float64(sum)/float64(len(s.Grades))
 
- return math.Round( averageGrade*10)/ 10
+	firstNameInitial := strings.ToUpper(string([]rune(u.FirstName)[0]))
+	lastNameInitial := strings.ToUpper(string([]rune(u.LastName)[0]))
+
+	rand.Seed(time.Now().UnixNano())
+	randomNumber := rand.Intn(100) + 1
+
+	secretID := fmt.Sprintf("%s%s%d", firstNameInitial, lastNameInitial, randomNumber)
+	return secretID, nil
 }
 
-func (s Student) Info() string {
-// avg := s.AverageGrade()
-return fmt.Sprintf("Студент:%s, средняя оценка: %.1f.", s.Name, s.AverageGrade())
-
-
-	
-}
 
 func main() {
-	user := Student {
-	Name: "Aenby",
-	Grades:[]int{5,5,5,4,5,4,5,4,5,3,5,5,5,4,5,3,5,5},
+	
+	user := User{
+		FirstName: "Алексей",
+		LastName:  "Смирнов",
+	}
+	
+	fmt.Printf("Пользователь: %s %s\n", user.FirstName, user.LastName)
+
+	if secret, err := user.SecretIdentity(); err != nil {
+		fmt.Println("Ошибка:", err)
+	} else {
+		fmt.Printf("Секретное имя: %s\n", secret)
+	}
 }
-	user2 := Student {
-	Name: "Frrrrrr",
-	Grades:[]int{5,5,5,3,5,4,5,3,3,3,4},
-}
-fmt.Println (user)
-fmt.Println ( user2)
-
-fmt.Println(user.Info())
-fmt.Println(user2.Info())
-
-}
-
-	// https://stepik.org/lesson/1500869/step/3?unit=1520986
-
