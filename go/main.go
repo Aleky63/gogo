@@ -47,8 +47,6 @@ fmt.Println ( user2)
 fmt.Println(user.Info())
 fmt.Println(user2.Info())
 
-
-
 }
 
 	// https://stepik.org/lesson/1500869/step/3?unit=1520986
