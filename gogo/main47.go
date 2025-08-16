@@ -7,8 +7,8 @@ import (
 )
 
 type Address struct {
-	ID         int
-	
+	ID int
+
 	City       string
 	Street     string
 	PostalCode int
@@ -30,25 +30,25 @@ type CartItem struct {
 	Quantity int
 }
 
-type User struct {
+type Useras struct {
 	Name    string
-	 Email string
-	 Phone    string
+	Email   string
+	Phone   string
 	Address Address
 	Cart    []CartItem
 }
 
-func printInfo(user User) error {
-	if user.Name == "" ||  user.Phone == "" || user.Address.City == "" || user.Address.Street == "" {
+func printInfo(useras Useras) error {
+	if useras.Name == "" || useras.Phone == "" || useras.Address.City == "" || useras.Address.Street == "" {
 		return errors.New("ошибка: не все обязательные данные пользователя переданы")
 	}
 	fmt.Printf("Покупатель %s. Телефон: %s. Адрес: г. %s, %s.\n",
-		user.Name, user.Phone, user.Address.City, user.Address.Street)
+		useras.Name, useras.Phone, useras.Address.City, useras.Address.Street)
 	return nil
 }
 
-func hasElectronics(user User) bool {
-	for _, item := range user.Cart {
+func hasElectronics(useras Useras) bool {
+	for _, item := range useras.Cart {
 		if item.Product.Category == "Электроника" {
 			return true
 		}
@@ -56,30 +56,29 @@ func hasElectronics(user User) bool {
 	return false
 }
 
-func expensiveItems(user User) []string {
-var res [] string
-for _, item := range user.Cart {
-	if item.Product.Price >= 10000{
-		res = append(res, item.Product.Name)
+func expensiveItems(useras Useras) []string {
+	var res []string
+	for _, item := range useras.Cart {
+		if item.Product.Price >= 10000 {
+			res = append(res, item.Product.Name)
+		}
+
 	}
-	
+	return res
 }
-return res
-}
-func totalSum(user User) int {
-	 var sum int
-	for _, item:= range user.Cart {
+func totalSum(useras Useras) int {
+	var sum int
+	for _, item := range useras.Cart {
 		sum += item.Product.Price * int(item.Quantity)
 	}
 	return sum
 }
 
-
 func main47() {
-	user := User{
+	useras := Useras{
 		Name:  "Иван Петров",
 		Phone: "+7 999 123-45-67",
-		 Email: "ssss.ivanov@example.com",
+		Email: "ssss.ivanov@example.com",
 		Address: Address{
 			ID:         1,
 			City:       "Yeysk",
@@ -129,19 +128,19 @@ func main47() {
 		},
 	}
 
-	if err := printInfo(user); err != nil {
+	if err := printInfo(useras); err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	if hasElectronics(user) {
+	if hasElectronics(useras) {
 		fmt.Println("Пользователь является покупателем электроники.")
 	} else {
 		fmt.Println("Пользователь не является покупателем электроники.")
 	}
-	expItems := expensiveItems(user)
+	expItems := expensiveItems(useras)
 	fmt.Printf("Товары в корзине, где цена 10000 и более: [%s].\n", strings.Join(expItems, ", "))
-	fmt.Printf("Общая сумма покупки: %.2d руб.\n", totalSum(user))
+	fmt.Printf("Общая сумма покупки: %.2d руб.\n", totalSum(useras))
 }
-	
-	// https://stepik.org/lesson/1500867/step/3?unit=1520984
+
+// https://stepik.org/lesson/1500867/step/3?unit=1520984

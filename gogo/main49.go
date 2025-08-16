@@ -103,7 +103,7 @@ func (u *User) UpdateName(firstName, lastName string) error {
 	u.LastName = lastName
 	return nil
 }
-func main() {
+func main49() {
 	// Создаем пользователя
 	user := &User{
 		FirstName: "Donald",
