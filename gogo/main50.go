@@ -25,14 +25,14 @@ var (
 	ErrIncorrectEmail    = errors.New("incorrect email")
 )
 
-type Student struct {
+type Student1 struct {
 	Name  string
 	Age   int
 	Grade int
 	Email string
 }
 
-func NewStudent(name string, age, grade int, email string) (*Student, error) {
+func NewStudent1(name string, age, grade int, email string) (*Student1, error) {
 
 	if strings.TrimSpace(name) == "" {
 		return nil, ErrEmptyName
@@ -57,7 +57,7 @@ func NewStudent(name string, age, grade int, email string) (*Student, error) {
 		return nil, ErrIncorrectEmail
 	}
 
-	return &Student{
+	return &Student1{
 		Name:  name,
 		Age:   age,
 		Grade: grade,
@@ -66,7 +66,7 @@ func NewStudent(name string, age, grade int, email string) (*Student, error) {
 }
 
 // Пример использования
-func main() {
+func main50() {
 	// Тестовые случаи
 	testCases := []struct {
 		name  string
@@ -86,13 +86,15 @@ func main() {
 	}
 
 	for i, tc := range testCases {
-		student, err := NewStudent(tc.name, tc.age, tc.grade, tc.email)
+		Student1, err := NewStudent1(tc.name, tc.age, tc.grade, tc.email)
 		fmt.Printf("Тест %d (%s):\n", i+1, tc.desc)
 		if err != nil {
 			fmt.Printf("  Ошибка: %v\n", err)
 		} else {
-			fmt.Printf("  Студент создан: %+v\n", *student)
+			fmt.Printf("  Студент создан: %+v\n", *Student1)
 		}
 		fmt.Println()
 	}
 }
+
+// https://stepik.org/lesson/1500872/step/5?thread=solutions&unit=1520989
