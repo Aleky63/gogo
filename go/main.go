@@ -3,96 +3,60 @@ package main
 import (
 	"errors"
 	"fmt"
-
-	"strings"
+	"log"
 )
 
-const (
-	MinAge                = 15
-	MaxAge                = 80
-	MinGrade              = 1
-	MaxGrade              = 5
-	GreatAge              = 30
-	MinGradeAfterGreatAge = 3
-)
-
-var (
-	ErrEmptyName         = errors.New("name cannot be empty")
-	ErrTooYoung          = errors.New("too young")
-	ErrTooOld            = errors.New("too old")
-	ErrGradeOutOfRange   = errors.New("grade out of range")
-	ErrTooLowGradeForAge = errors.New("too low grade for age")
-	ErrIncorrectEmail    = errors.New("incorrect email")
-)
-
-type Student struct {
-	Name  string
-	Age   int
-	Grade int
-	Email string
+type Engine struct {
+	HorsePower int
+	Started    bool
 }
 
-func NewStudent(name string, age, grade int, email string) (*Student, error) {
-
-	if strings.TrimSpace(name) == "" {
-		return nil, ErrEmptyName
+func (e *Engine) Start() error {
+	if e.Started {
+		return errors.New(("already started"))
 	}
-
-	if age < MinAge {
-		return nil, ErrTooYoung
-	}
-	if age > MaxAge {
-		return nil, ErrTooOld
-	}
-
-	if grade < MinGrade || grade > MaxGrade {
-		return nil, ErrGradeOutOfRange
-	}
-
-	if age > GreatAge && grade < MinGradeAfterGreatAge {
-		return nil, ErrTooLowGradeForAge
-	}
-
-	if !strings.Contains(email, "@") {
-		return nil, ErrIncorrectEmail
-	}
-
-	return &Student{
-		Name:  name,
-		Age:   age,
-		Grade: grade,
-		Email: email,
-	}, nil
+	e.Started = true
+	return nil
 }
 
-// Пример использования
+type Car struct {
+	Engine Engine
+	Model  string
+}
+
+func (c *Car) Start() error {
+	if err := c.Engine.Start(); err != nil {
+		return fmt.Errorf("engine start: %w", err)
+	}
+	return nil
+}
+
+func (c Car) Drive() error {
+	if !c.Engine.Started {
+		return errors.New("engine not started")
+	}
+	return nil
+}
+
 func main() {
-	// Тестовые случаи
-	testCases := []struct {
-		name  string
-		age   int
-		grade int
-		email string
-		desc  string
-	}{
-		{"Иван Петров", 20, 4, "ivan@example.com", "Валидный студент"},
-		{"", 20, 4, "test@example.com", "Пустое имя"},
-		{"Анна Смирнова", 14, 4, "anna@example.com", "Слишком молодой"},
-		{"Петр Иванов", 85, 4, "petr@example.com", "Слишком старый"},
-		{"Мария Козлова", 25, 6, "maria@example.com", "Оценка вне диапазона"},
-		{"Алексей Сидоров", 35, 2, "alex@example.com", "Низкая оценка для возраста"},
-		{"Елена Волкова", 22, 3, "elena.example.com", "Неправильный email"},
-		{"Дмитрий Новиков", 32, 4, "dmitry@example.com", "Валидный зрелый студент"},
+	car := Car{
+		Engine: Engine{
+			Started:    false,
+			HorsePower: 150,
+		},
+		Model: "Toyota",
 	}
 
-	for i, tc := range testCases {
-		student, err := NewStudent(tc.name, tc.age, tc.grade, tc.email)
-		fmt.Printf("Тест %d (%s):\n", i+1, tc.desc)
-		if err != nil {
-			fmt.Printf("  Ошибка: %v\n", err)
-		} else {
-			fmt.Printf("  Студент создан: %+v\n", *student)
-		}
-		fmt.Println()
+	if err := car.Drive(); err != nil {
+		log.Fatalf("drive car: %v", err)
 	}
+
+	fmt.Printf("auto pusk, model %s, sil: %d", car.Model, car.Engine.HorsePower)
+
+	fmt.Printf("%+v\n", car)
+
+	if err := car.Start(); err != nil {
+		log.Fatalf("start car: %v", err)
+	}
+
 }
