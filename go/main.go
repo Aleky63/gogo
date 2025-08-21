@@ -1,62 +1,30 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"log"
 )
 
-type Engine struct {
-	HorsePower int
-	Started    bool
+type Animal struct {
+	Name string
 }
 
-func (e *Engine) Start() error {
-	if e.Started {
-		return errors.New(("already started"))
-	}
-	e.Started = true
-	return nil
+func (a Animal) Speak() {
+	fmt.Printf("%s издает звук\n", a.Name)
 }
 
-type Car struct {
-	Engine Engine
-	Model  string
+type Dog struct {
+	Animal
 }
 
-func (c *Car) Start() error {
-	if err := c.Engine.Start(); err != nil {
-		return fmt.Errorf("engine start: %w", err)
-	}
-	return nil
+func (d Dog) Speak() {
+	fmt.Printf("%s издает звук\n", d.Name)
 }
-
-func (c Car) Drive() error {
-	if !c.Engine.Started {
-		return errors.New("engine not started")
-	}
-	return nil
-}
-
 func main() {
-	car := Car{
-		Engine: Engine{
-			Started:    false,
-			HorsePower: 150,
+	dog := Dog{
+
+		Animal: Animal{
+			Name: "EWEDAcdcd",
 		},
-		Model: "Toyota",
 	}
-
-	if err := car.Drive(); err != nil {
-		log.Fatalf("drive car: %v", err)
-	}
-
-	fmt.Printf("auto pusk, model %s, sil: %d", car.Model, car.Engine.HorsePower)
-
-	fmt.Printf("%+v\n", car)
-
-	if err := car.Start(); err != nil {
-		log.Fatalf("start car: %v", err)
-	}
-
+	dog.Speak()
 }
