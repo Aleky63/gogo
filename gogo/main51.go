@@ -109,7 +109,7 @@ func generatePassword(length int, count int) ([]string, error) {
 	return result, nil
 }
 
-func main() {
+func main51() {
 	passwords, err := generatePassword(19, 9)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Ошибка: %v\n", err)
