@@ -75,3 +75,5 @@ func main() {
 	// Список тегов после удаления
 	fmt.Println("Current tags after removal:", tm.ListTags()) // [programming]
 }
+
+//https://stepik.org/lesson/1536760/step/1?unit=1557351
