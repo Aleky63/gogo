@@ -4,27 +4,20 @@ import (
 	"fmt"
 )
 
-type Animal struct {
-	Name string
-}
-
-func (a Animal) Speak() {
-	fmt.Printf("%s издает звук\n", a.Name)
-}
-
-type Dog struct {
-	Animal
-}
-
-func (d Dog) Speak() {
-	fmt.Printf("%s издает звук\n", d.Name)
-}
 func main() {
-	dog := Dog{
+	s := []int{5, 2, 3, 5, 69, 63, 258}
 
-		Animal: Animal{
-			Name: "EWEDAcdcd",
-		},
+	fmt.Print(notUnique(s))
+}
+
+func notUnique(s []int) bool {
+	m := make(map[int]struct{})
+	for i := 0; i < len(s); i++ {
+		val := s[i]
+		if _, ok := m[val]; ok {
+			return true
+		}
+		m[val] = struct{}{}
 	}
-	dog.Speak()
+	return false
 }
