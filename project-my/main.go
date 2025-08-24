@@ -63,10 +63,6 @@ func main() {
 
 	}
 	pr.UpdateTask(*tk2)
-	// Обновляем задачу в проекте
-	// if err := pr.UpdateTask(*tk2); err != nil {
-	// 	log.Fatalf("update task error: %v\n", err)
-	// }
 
 	// Просматриваем данные проекта
 	pr.PrintInfo()
