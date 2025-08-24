@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/google/uuid"
 	"log"
 	"yourgo/project"
+
+	"github.com/google/uuid"
 )
 
 type Project struct {
@@ -28,52 +29,55 @@ func main() {
 
 	fmt.Println(pr, tk1)
 
-	// // Добавляем задачу в проект 1
-	// if err := pr.AddTask(*tk1); err != nil {
-	// 	log.Fatalf("add task to project error: %v\n", err)
-	// }
+	// Добавляем задачу в проект 1
+	if err := pr.AddTask(*tk1); err != nil {
+		log.Fatalf("add task to project error: %v\n", err)
+	}
 
-	// // Создаем задачу 2 для проекта 1
-	// tk2, err := project.NewTask(uuid.New(), "Задача 2", "Описание важной задачи №2")
-	// if err != nil {
-	// 	log.Fatalf("create task error: %v\n", err)
-	// }
-	// // Добавляем задачу в проект 1
-	// if err := pr.AddTask(*tk2); err != nil {
-	// 	log.Fatalf("add task to project error: %v\n", err)
-	// }
+	// Создаем задачу 2 для проекта 1
+	tk2, err := project.NewTask(uuid.New(), "Задача 2", "Описание важной задачи №2")
+	if err != nil {
+		log.Fatalf("create task error: %v\n", err)
+	}
+	// Добавляем задачу в проект 1
+	if err := pr.AddTask(*tk2); err != nil {
+		log.Fatalf("add task to project error: %v\n", err)
+	}
 
-	// Просматриваем данные проекта
-	// pr.PrintInfo()
+	pr.PrintInfo()
 
-	// fmt.Println("---")
+	// Обновляем описание задачи 1
+	if err := tk1.UpdateDescription("Новое описание важной задачи №1"); err != nil {
+		log.Fatalf("task update description error: %v\n", err)
+	}
+	pr.UpdateTask(*tk1)
 
-	// // Обновляем описание задачи 1
-	// if err := tk1.UpdateDescription("Новое описание важной задачи №2"); err != nil {
-	// 	log.Fatalf("task update description error: %v\n", err)
-	// }
 	// // Обновляем задачу в проекте
 	// if err := pr.UpdateTask(*tk1); err != nil {
 	// 	log.Fatalf("update task error: %v\n", err)
 	// }
 
-	// // Закрываем задачу 2
-	// if err := tk2.Close(); err != nil {
-	// 	log.Fatalf("task close error: %v\n", err)
-	// }
-	// // Обновляем задачу в проекте
+	// Закрываем задачу 2
+	if err := tk2.Close(); err != nil {
+		log.Fatalf("task close error: %v\n", err)
+
+	}
+	pr.UpdateTask(*tk2)
+	// Обновляем задачу в проекте
 	// if err := pr.UpdateTask(*tk2); err != nil {
 	// 	log.Fatalf("update task error: %v\n", err)
 	// }
 
-	// // Просматриваем данные проекта
-	// pr.PrintInfo()
+	// Просматриваем данные проекта
+	pr.PrintInfo()
 
-	// fmt.Println("---")
+	fmt.Println("---")
 
-	// Отображаем только закрытые задачи
-	// fmt.Println("Закрытые задачи проекта:")
-	// for _, task := range pr.FilterTasksByStatus(project.StatusClosed) {
-	// 	fmt.Printf("Задача: %s, Описание: %s, Статус: %s\n", task.Title, task.Description, task.Status)
-	// }
+	fmt.Println("Закрытые задачи проекта:")
+	for _, task := range pr.FilterTasksByStatus(project.StatusClosed) {
+		fmt.Printf("Задача: %s, Описание: %s, Статус: %s\n", task.Title, task.Describe, task.Status)
+	}
+	fmt.Println("---")
 }
+
+// https://stepik.org/lesson/1536759/step/2?unit=1557350

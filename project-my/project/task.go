@@ -34,3 +34,22 @@ func NewTask(ID uuid.UUID, title, describe string) (*Task, error) {
 		Status:   StatusActive,
 	}, nil
 }
+func (t *Task) UpdateDescription(desc string) error {
+	if desc == "" {
+		return errors.New("empty description")
+
+	}
+	if t.Status != StatusActive {
+		return errors.New("task status not active")
+	}
+	t.Describe = desc
+	return nil
+}
+func (t *Task) Close() error {
+
+	if t.Status == StatusClosed {
+		return errors.New("status closed already")
+	}
+	t.Status = StatusClosed
+	return nil
+}
