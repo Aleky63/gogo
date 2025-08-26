@@ -19,7 +19,7 @@ func (Bird) Speak() string {
 	return "Kyyyyy"
 }
 
-func main() {
+func main53() {
 	dog := Dog{}
 	cat := Cat{}
 	bird := Bird{}
