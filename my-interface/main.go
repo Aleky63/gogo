@@ -34,7 +34,7 @@ func NewMage(name string) (*Mage, error) {
 }
 
 func (m *Mage) Attack() string {
-	return fmt.Sprintf("Маг %s колдует огненный шар.", m.name)
+	return fmt.Sprintf("Маг %s колдует ,jjj огненный шар.", m.name)
 }
 
 type Archer struct {
