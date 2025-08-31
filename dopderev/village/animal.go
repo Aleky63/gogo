@@ -24,6 +24,10 @@ func NewAnimal(name, animalType string, age int) *Animal {
 	}
 }
 
+func (a *Animal) IsAlive() bool {
+	return a.Alive
+}
+
 func (a *Animal) addYear() {
 	a.Age++
 }

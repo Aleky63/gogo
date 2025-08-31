@@ -23,6 +23,11 @@ func NewResident(name string, age int, married bool) *Resident {
 		Events:  []string{},
 	}
 }
+
+func (r *Resident) IsAlive() bool {
+	return r.Alive
+}
+
 func (r *Resident) addYear() {
 	r.Age++
 }
