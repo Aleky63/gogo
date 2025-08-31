@@ -86,6 +86,50 @@ type Animal struct {
 	Events []string
 }
 
+func (a *Animal) addYear() {
+	a.Age++
+}
+
+func (a *Animal) die() {
+	a.Alive = false
+	a.Events = append(a.Events, fmt.Sprintf("aaaaa na %d zzzz.", a.Age))
+}
+
+func (a *Animal) Update() {
+	if !a.Alive {
+		return
+	}
+	a.addYear()
+	if rand.IntN(100) < 5 {
+		a.Events = append(a.Events, "Slomal lapy")
+	}
+	if rand.IntN(100) < 5 && a.Type == "sobaka" {
+		a.Events = append(a.Events, "Ukysil soseda")
+	}
+	if rand.IntN(100) < 15 && a.Type == "koshka" {
+		a.Events = append(a.Events, "Ubeshal iz doma")
+	}
+
+	if rand.IntN(100) < 8 {
+		a.die()
+	}
+}
+
+func (a *Animal) FlushInfo() string {
+
+	info := fmt.Sprintf("Animal %s ymer v age %d.", a.Name, a.Age)
+	if a.Alive {
+
+		events := "net"
+		if len(a.Events) > 0 {
+			events = strings.Join(a.Events, "\n")
+		}
+		info = fmt.Sprintf("Animal %s (age: %d),  \nSobaatie: %s\n", a.Name, a.Age, events)
+	}
+	a.Events = []string{}
+	return info
+}
+
 type Village struct {
 	Elements []VillageElement
 }
@@ -116,14 +160,14 @@ func main() {
 	resident2 := &Resident{Name: "Борис", Age: 40, Married: true, Alive: true, Events: []string{}}
 
 	// Создаем животных
-	// animal1 := &Animal{Name: "Бобик", Age: 5, Type: "собака", Alive: true, Events: []string{}}
-	// animal2 := &Animal{Name: "Мурка", Age: 3, Type: "кошка", Alive: true, Events: []string{}}
+	animal1 := &Animal{Name: "Бобик", Age: 5, Type: "собака", Alive: true, Events: []string{}}
+	animal2 := &Animal{Name: "Мурка", Age: 3, Type: "кошка", Alive: true, Events: []string{}}
 
 	// Добавляем элементы в деревню
 	village.AddElement(resident1)
 	village.AddElement(resident2)
-	// village.AddElement(animal1)
-	// village.AddElement(animal2)
+	village.AddElement(animal1)
+	village.AddElement(animal2)
 
 	// Симуляция обновления деревни на несколько лет
 	for i := 0; i < 5; i++ {
@@ -132,5 +176,3 @@ func main() {
 		fmt.Println(village.ShowAllInfo())
 	}
 }
-
-// https://stepik.org/lesson/1538383/step/2?unit=1558981
