@@ -27,3 +27,5 @@ func run() error {
 	}
 	return nil
 }
+
+// https://stepik.org/lesson/1501024/step/1?unit=1521140
