@@ -95,6 +95,7 @@ func main() {
 
 	fmt.Println("\n=== Чат 5 (неизвестная ошибка) ===")
 	service.PrintChat(5)
+
 }
 
 // https://stepik.org/lesson/1501024/step/4?unit=1521140
