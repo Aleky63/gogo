@@ -28,5 +28,9 @@ func (e NetworkError) Error() string {
 	return fmt.Sprintf("network error: %s", e.Err)
 }
 
+func (e NetworkError) Unwrap() error {
+	return e.Err
+}
+
 // https://stepik.org/lesson/1501026/step/1?unit=1521142
 //  Оборачивание пользовательских ошибок
