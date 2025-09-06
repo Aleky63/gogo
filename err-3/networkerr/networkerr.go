@@ -1,0 +1,32 @@
+package networkerr
+
+import (
+	"errors"
+	"fmt"
+)
+
+type NetworkError struct {
+	Err  error
+	Code int
+}
+
+func New(msg string, code int) *NetworkError {
+	return &NetworkError{
+		Err:  errors.New(msg),
+		Code: code,
+	}
+}
+
+func NewWithErr(err error, code int) *NetworkError {
+	return &NetworkError{
+		Err:  err,
+		Code: code,
+	}
+}
+
+func (e NetworkError) Error() string {
+	return fmt.Sprintf("network error: %s", e.Err)
+}
+
+// https://stepik.org/lesson/1501026/step/1?unit=1521142
+//  Оборачивание пользовательских ошибок
