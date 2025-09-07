@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-var ErrServiceUnavailable = networkerr.New("service unavailable", 222)
+var ErrServiceUnavailable = networkerr.New("service unavailable", 2225566)
 var ErrNoInternet error = errors.New("no internet")
 
 type Worker struct{}
