@@ -2,12 +2,12 @@ package main
 
 import "fmt"
 
-type Wallet struct {
+type Wallett struct {
 	Cash int
 }
 
 // Pay implements Payer.
-func (w *Wallet) Pay(int) error {
+func (w *Wallett) Pay(int) error {
 	panic("unimplemented")
 }
 
@@ -41,11 +41,11 @@ func (a *ApplePay) Pay(amount int) error {
 	return nil
 }
 
-type Payer interface {
+type Payerr interface {
 	Pay(int) error
 }
 
-func Buy(p Payer) {
+func Buyy(p Payerr) {
 	err := p.Pay(10)
 	if err != nil {
 		panic(err)
@@ -54,15 +54,15 @@ func Buy(p Payer) {
 }
 
 func main3() {
-	myWallet := &Wallet{Cash: 100}
-	Buy(myWallet)
+	myWallet := &Wallett{Cash: 100}
+	Buyy(myWallet)
 
-	var myMoney Payer
+	var myMoney Payerr
 	myMoney = &Card{Balance: 100, Cardholder: "rvas"}
-	Buy(myMoney)
+	Buyy(myMoney)
 
 	myMoney = &ApplePay{Money: 9}
 
-	Buy(myMoney)
+	Buyy(myMoney)
 
 }

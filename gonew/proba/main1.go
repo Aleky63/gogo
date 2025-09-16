@@ -1,46 +1,46 @@
-// package main
+package main
 
-// import "fmt"
+import "fmt"
 
-// type Person struct {
-// 	Id   int
-// 	Name string
-// }
+type Person struct {
+	Id   int
+	Name string
+}
 
-// func (p *Person) SetName(name string) {
-// 	p.Name = name
-// }
+func (p *Person) SetName(name string) {
+	p.Name = name
+}
 
-// type MySlice []int
+type MySlice []int
 
-// func (sl *MySlice) Add(val int) {
-// 	*sl = append(*sl, val)
-// }
-// func (sl *MySlice) Count() int {
-// 	return len(*sl)
-// }
+func (sl *MySlice) Add(val int) {
+	*sl = append(*sl, val)
+}
+func (sl *MySlice) Count() int {
+	return len(*sl)
+}
 
-// type Account struct {
-// 	Id   int
-// 	Name string
-// 	Person
-// }
+type Account struct {
+	Id   int
+	Name string
+	Person
+}
 
-// func main1() {
+func main1() {
 
-// 	pers := Person{1, "Vasiliy"}
-// 	pers.SetName(("Vasiliy Romanov"))
-// 	fmt.Println(pers)
-// 	fmt.Printf("updated person: %#v\n", pers)
+	pers := Person{1, "Vasiliy"}
+	pers.SetName(("Vasiliy Romanov"))
+	fmt.Println(pers)
+	fmt.Printf("updated person: %#v\n", pers)
 
-// 	var acc Account = Account{
-// 		Id:   3,
-// 		Name: "rrrrrrrrr",
-// 		Person: Person{
-// 			Id:   5,
-// 			Name: "ASSSSSSS",
-// 		},
-// 	}
-// 	acc.SetName("ROOOOOOO")
-// 	fmt.Printf(" %#v\n", acc)
-// }
+	var acc Account = Account{
+		Id:   3,
+		Name: "rrrrrrrrr",
+		Person: Person{
+			Id:   5,
+			Name: "ASSSSSSS",
+		},
+	}
+	acc.SetName("ROOOOOOO")
+	fmt.Printf(" %#v\n", acc)
+}

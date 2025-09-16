@@ -1,32 +1,32 @@
-// package main
+package main
 
-// import "fmt"
+import "fmt"
 
-// type Payer interface {
-// 	Pay(int) error
-// }
-// type Wallet struct {
-// 	Cash int
-// }
+type Payer interface {
+	Pay(int) error
+}
+type Wallet struct {
+	Cash int
+}
 
-// func (w *Wallet) Pay(amount int) error {
-// 	if w.Cash < amount {
-// 		return fmt.Errorf("Мало денег")
-// 	}
-// 	w.Cash -= amount
-// 	return nil
-// }
+func (w *Wallet) Pay(amount int) error {
+	if w.Cash < amount {
+		return fmt.Errorf("Мало денег")
+	}
+	w.Cash -= amount
+	return nil
+}
 
-// func Buy(p Payer) {
-// 	err := p.Pay(10)
-// 	if err != nil {
-// 		panic(err)
-// 	}
-// 	fmt.Printf("Спасибо за покупку через %T\n\n", p)
-// }
+func Buy(p Payer) {
+	err := p.Pay(10)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Спасибо за покупку через %T\n\n", p)
+}
 
-// func main2() {
-// 	myWallet := &Wallet{Cash: 100}
-// 	Buy(myWallet)
+func main2() {
+	myWallet := &Wallet{Cash: 100}
+	Buy(myWallet)
 
-// }
+}
