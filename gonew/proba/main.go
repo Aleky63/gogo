@@ -26,7 +26,7 @@ type Account struct {
 	Person
 }
 
-func main1() {
+func main() {
 
 	pers := Person{1, "Vasiliy"}
 	pers.SetName(("Vasiliy Romanov"))
