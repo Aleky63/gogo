@@ -27,7 +27,7 @@ func TestOk(t *testing.T) {
 	err := uniq(in, out)
 
 	if err != nil {
-		t.Errorf("test for OK Failed-error")
+		t.Errorf("test for OK Failed-errror")
 	}
 	result := out.String()
 	if out.String() != testOkResult {
