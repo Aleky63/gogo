@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	fmt.Println("QCQCWDSFDVVFVVS")
+	fmt.Println("QCQCWDSFивDVVFVVS")
 
 	color.Blue("QCQCWDSFDVVFVVS")
 
@@ -15,3 +15,4 @@ func main() {
 
 	color.Red("4256696")
 }
+и
