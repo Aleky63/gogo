@@ -1,4 +1,4 @@
-module hello8
+module hello12
 
 go 1.25.1
 
