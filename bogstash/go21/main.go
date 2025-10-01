@@ -17,7 +17,7 @@ func main() {
 	var pointer *float64 = &coffeePrice
 	red := color.New(color.FgRed).SprintfFunc()
 	*pointer = 6.66
-	color := red("%.2f", *pointer)
+	colorMy := red("%.2f", *pointer)
 	fmt.Println(pointer)
-	fmt.Println("Coffee priceeeee", color)
+	fmt.Println("Coffee priceeeee", colorMy)
 }

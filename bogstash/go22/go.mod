@@ -1,4 +1,4 @@
-module hello20
+module hello22
 
 go 1.25.1
 
