@@ -14,11 +14,11 @@ import (
 //	}
 func main() {
 
-	yellow := color.New(color.FgHiYellow).SprintfFunc()
+	green := color.New(color.FgHiGreen).SprintfFunc()
 	coffeeTypes := [3]string{"Tramp", "Putler", "Si"}
 
 	slice := coffeeTypes[1:]
 
 	fmt.Println(coffeeTypes)
-	fmt.Println(yellow("%v", slice))
+	fmt.Println(green("%v", slice))
 }
