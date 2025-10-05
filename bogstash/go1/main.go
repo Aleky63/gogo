@@ -14,3 +14,5 @@ func main() {
 
 	color.Magenta("4256696")
 }
+
+//https://www.youtube.com/watch?v=SXTQj6XJOWg&t=132s
