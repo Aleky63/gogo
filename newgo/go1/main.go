@@ -9,7 +9,7 @@ import (
 func main() {
 	fmt.Println()
 	fmt.Print()
-	proba := 5555555
+	proba := "5555ffff555"
 	blue := color.New(color.FgHiBlue).SprintfFunc()
 	fmt.Println(blue("%v", proba))
 }
