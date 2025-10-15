@@ -36,7 +36,7 @@ func main() {
 
 		fmt.Println("y", i)
 		if rand.Intn(4) == 1 {
-			fmt.Println("🛠️🛠️🛠️🛠️")
+			fmt.Println("🛠️")
 			break
 		}
 	}
