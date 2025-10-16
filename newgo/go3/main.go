@@ -11,11 +11,11 @@ func main() {
 
 	fmt.Print("A  ")
 	time.Sleep(3 * time.Second)
-	fmt.Println(aboba(5, 6, 9))
+	fmt.Println(aboba(5, 6, 8))
 }
 func aboba(a, b, c int) string {
 	red := color.New(color.FgHiRed).SprintFunc()
-
-	return "Sum: " + red(a+b+c)
+	sum := a + b + c
+	return "Sum: " + red(sum)
 
 }
