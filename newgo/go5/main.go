@@ -1,10 +1,8 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"time"
-
-	"github.com/fatih/color"
 )
 
 type User struct {
@@ -15,12 +13,56 @@ type User struct {
 	Rating      float64
 }
 
-func aboba(a, b, c int) string {
+func NewUser(
+	name string,
+	age int,
+	phoneNumber string,
+	isClose bool,
+	rating float64,
+) (User, error) {
+	if name == "" {
+		return User{}, errors.New("name cannot be empty")
+	}
+	if age <= 0 || age >= 150 {
+		return User{}, errors.New("age must be between 1 and 149")
+	}
+	if phoneNumber == "" {
+		return User{}, errors.New("phone number cannot be empty")
+	}
+	if rating <= 0 || rating >= 10 {
+		return User{}, errors.New("rating must be greater than 0 and less than 10")
+	}
 
-	red := color.New(color.FgHiRed).SprintFunc()
-	sum := a + b + c
-	return "Sum: " + red(sum)
+	return User{
+		Name:        name,
+		Age:         age,
+		PhoneNumber: phoneNumber,
+		IsClose:     isClose,
+		Rating:      rating,
+	}, nil
+}
 
+func (u *User) ChangeName(newName string) {
+	if newName != "" {
+		u.Name = newName
+	}
+}
+
+func (u *User) ChangePhone(newPhone string) {
+	if newPhone != "" {
+		u.PhoneNumber = newPhone
+	}
+}
+func (u *User) ChangeAge(newAge int) {
+	if newAge > 0 && newAge < 150 {
+		u.Age = newAge
+	}
+}
+func (u *User) CloseAccount() {
+	u.IsClose = true
+}
+func (u *User) openAccount() {
+	u.IsClose = false
 }
 
 func (u User) Greeting() {
@@ -33,30 +75,19 @@ func (u User) Greeting() {
 func (u *User) RaingUp(rating float64) {
 	if u.Rating+rating <= 10.0 {
 		u.Rating += rating
-		fmt.Println(" прошел")
-	} else {
-		fmt.Println(("Не прошел"))
+	}
+}
+func (u *User) RaingDoun(rating float64) {
+	if u.Rating-rating >= 0.0 {
+		u.Rating -= rating
 	}
 }
 
 func main() {
-	defer func() {
-		fmt.Print("После всех вывести ")
-	}()
-	user := User{
-		Name:        "RRR",
-		Age:         100,
-		PhoneNumber: "+7(999) 999 9999",
-		IsClose:     false,
-		Rating:      5.5,
+	user, err := NewUser("RRR", 80, "+7(999) 999 9999", true, 5.5)
+	if err != nil {
+		fmt.Println("Error creating user:", err)
+		return
 	}
 	fmt.Println("User:", user)
-
-	fmt.Println("A")
-	time.Sleep(3 * time.Second)
-	fmt.Println(aboba(5, 6, 8))
-
-	user.Greeting()
-	user.RaingUp(3.33)
-	fmt.Println(user)
 }
