@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/fatih/color"
+	"github.com/k0kubun/pp"
 )
 
 type User struct {
@@ -63,9 +64,10 @@ func (u *User) ChangeAge(newAge int) {
 func (u *User) CloseAccount() {
 	u.IsClose = true
 }
-func (u *User) openAccount() {
-	u.IsClose = false
-}
+
+// func (u *User) openAccount() {
+// 	u.IsClose = false
+// }
 
 func (u User) Greeting() {
 	fmt.Println("Meyz zovyt:", u.Name)
@@ -93,4 +95,6 @@ func main() {
 	}
 	red := color.New(color.FgHiRed).SprintFunc()
 	fmt.Println("User:", red(user))
+	pp.Println("User:", user)
+
 }
