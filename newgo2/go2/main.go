@@ -57,23 +57,9 @@ func main() {
 		m: make(map[int]PaymentInfo),
 	}
 	//  добавляем информацию в слайс и мапу
-	interations := 10000
+	interations := 100000
 
 	before := time.Now()
-
-	for i := 0; i < interations; i++ {
-		pSlice.AddInfo(PaymentInfo{
-
-			ID:          i,
-			Description: strconv.Itoa(i),
-		})
-
-	}
-	sliceAddTime := time.Since(before)
-
-	// ____________
-
-	before = time.Now()
 
 	for i := 0; i < interations; i++ {
 		pMap.AddInfo(PaymentInfo{
@@ -84,18 +70,18 @@ func main() {
 
 	}
 	mapAddTime := time.Since(before)
-	// --------------------
-	//  ищем информацию
-
-	before = time.Now()
 
 	for i := 0; i < interations; i++ {
+		pSlice.AddInfo(PaymentInfo{
 
-		info := pSlice.GetInfo(i)
-		_ = info
+			ID:          i,
+			Description: strconv.Itoa(i),
+		})
 
 	}
-	sliceGetTime := time.Since(before)
+	sliceAddTime := time.Since(before)
+	// --------------------
+	//  ищем информацию
 
 	before = time.Now()
 
@@ -106,6 +92,16 @@ func main() {
 
 	}
 	mapGetTime := time.Since(before)
+
+	before = time.Now()
+
+	for i := 0; i < interations; i++ {
+
+		info := pSlice.GetInfo(i)
+		_ = info
+
+	}
+	sliceGetTime := time.Since(before)
 
 	proba := "PROBA"
 	blue := color.New(color.FgHiBlue).SprintfFunc()
