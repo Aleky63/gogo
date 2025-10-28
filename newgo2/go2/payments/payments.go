@@ -25,7 +25,3 @@ func (p PaymentModule) Cancel() {}
 func (p PaymentModule) Info() {}
 
 func (p PaymentModule) AllInfo() {}
-
-// func main() {
-
-// }
