@@ -56,7 +56,7 @@ func main() {
 		m: make(map[int]PaymentInfo),
 	}
 	//  добавляем информацию в слайс и мапу
-	interations := 100000
+	interations := 50000
 
 	before := time.Now()
 
@@ -69,6 +69,8 @@ func main() {
 
 	}
 	mapAddTime := time.Since(before)
+
+	before = time.Now()
 
 	for i := 0; i < interations; i++ {
 		pSlice.AddInfo(PaymentInfo{
@@ -103,20 +105,18 @@ func main() {
 	sliceGetTime := time.Since(before)
 
 	proba := "PROBA"
-	blue := color.New(color.FgHiBlue).SprintfFunc()
-	fmt.Println(blue("%v", proba))
-
-	// pp.Println(pSlice)
-	// pp.Println(pMap)
+	blue := color.New(color.FgHiBlue).SprintFunc()
+	red := color.New(color.FgHiRed).SprintFunc()
+	fmt.Println(blue(proba))
 
 	i1s := pSlice.GetInfo((10))
 	i2m := pMap.GetInfo((10))
 	fmt.Println(i1s)
 	fmt.Println(i2m)
 
-	fmt.Println("slice add", sliceAddTime)
-	fmt.Println("map add", mapAddTime)
+	fmt.Println(red("slice add-- ", sliceAddTime))
+	fmt.Println(blue("map add-- ", mapAddTime))
 
-	fmt.Println("slice get", sliceGetTime)
-	fmt.Println("map get", mapGetTime)
+	fmt.Println(red("slice get-- ", sliceGetTime))
+	fmt.Println(blue("map get-- ", mapGetTime))
 }

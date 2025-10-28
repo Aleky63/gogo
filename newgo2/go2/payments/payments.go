@@ -6,6 +6,7 @@ type PaymentMethod interface {
 }
 
 type PaymentModule struct {
+	paymentsInfo  map[int]PaymentInfo
 	paymentMethod PaymentMethod
 }
 
