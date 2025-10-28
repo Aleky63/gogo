@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/fatih/color"
-	// "github.com/k0kubun/pp"
 )
 
 type PaymentInfo struct {
