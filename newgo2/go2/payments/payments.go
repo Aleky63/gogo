@@ -17,11 +17,11 @@ func NewPaymentModule(paymentMethod PaymentMethod) *PaymentModule {
 }
 
 func (p PaymentModule) Pay(description string, usd int) int {
-	p.paymentMethod.Pay(usd)
+	return p.paymentMethod.Pay(usd)
 
 }
 
-func (p PaymentModule) Cancel() {}
+func (p PaymentModule) Cancel(id int) {}
 
 func (p PaymentModule) Info() {}
 

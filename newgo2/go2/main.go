@@ -104,10 +104,10 @@ func main() {
 	}
 	sliceGetTime := time.Since(before)
 
-	proba := "PROBA"
+	proba := "---PROBA---"
 	blue := color.New(color.FgHiBlue).SprintFunc()
 	red := color.New(color.FgHiRed).SprintFunc()
-	fmt.Println(blue(proba))
+	fmt.Println(proba)
 
 	i1s := pSlice.GetInfo((10))
 	i2m := pMap.GetInfo((10))
