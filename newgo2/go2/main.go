@@ -60,7 +60,7 @@ func main() {
 
 	before := time.Now()
 
-	for i := 0; i < interations; i++ {
+	for i := range interations {
 		pMap.AddInfo(PaymentInfo{
 
 			ID:          i,
@@ -72,7 +72,7 @@ func main() {
 
 	before = time.Now()
 
-	for i := 0; i < interations; i++ {
+	for i := range interations {
 		pSlice.AddInfo(PaymentInfo{
 
 			ID:          i,
@@ -86,7 +86,7 @@ func main() {
 
 	before = time.Now()
 
-	for i := 0; i < interations; i++ {
+	for i := range interations {
 
 		info := pMap.GetInfo(i)
 		_ = info
@@ -96,7 +96,7 @@ func main() {
 
 	before = time.Now()
 
-	for i := 0; i < interations; i++ {
+	for i := range interations {
 
 		info := pSlice.GetInfo(i)
 		_ = info

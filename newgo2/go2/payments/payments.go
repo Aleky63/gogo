@@ -23,6 +23,6 @@ func (p PaymentModule) Pay(description string, usd int) int {
 
 func (p PaymentModule) Cancel(id int) {}
 
-func (p PaymentModule) Info() {}
+func (p PaymentModule) Info(id int) {}
 
 func (p PaymentModule) AllInfo() {}
