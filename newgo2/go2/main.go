@@ -56,7 +56,7 @@ func main() {
 		m: make(map[int]PaymentInfo),
 	}
 	//  добавляем информацию в слайс и мапу
-	interations := 50000
+	interations := 100000
 
 	before := time.Now()
 
