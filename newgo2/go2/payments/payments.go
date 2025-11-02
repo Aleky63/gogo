@@ -12,17 +12,46 @@ type PaymentModule struct {
 
 func NewPaymentModule(paymentMethod PaymentMethod) *PaymentModule {
 	return &PaymentModule{
+		paymentsInfo:  make(map[int]PaymentInfo),
 		paymentMethod: paymentMethod,
 	}
 }
 
 func (p PaymentModule) Pay(description string, usd int) int {
-	return p.paymentMethod.Pay(usd)
+
+	id := p.paymentMethod.Pay(usd)
+	info := PaymentInfo{
+
+		Description: description,
+		Usd:         usd,
+		Cancelled:   false,
+	}
+	p.paymentsInfo[id] = info
+
+	return id
 
 }
 
-func (p PaymentModule) Cancel(id int) {}
+func (p PaymentModule) Cancel(id int) {
 
-func (p PaymentModule) Info(id int) {}
+	info, ok := p.paymentsInfo[id]
 
-func (p PaymentModule) AllInfo() {}
+	if !ok {
+		return
+	}
+	p.paymentMethod.Cancel((id))
+	info.Cancelled = true
+	p.paymentsInfo[id] = info
+}
+
+func (p *PaymentModule) Info(id int) PaymentInfo {
+	info, ok := p.paymentsInfo[id]
+	if !ok {
+		return PaymentInfo{}
+	}
+	return info
+}
+
+func (p *PaymentModule) AllInfo() map[int]PaymentInfo {
+	return p.paymentsInfo
+}
