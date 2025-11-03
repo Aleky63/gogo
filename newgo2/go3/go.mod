@@ -1,8 +1,8 @@
-module go2
+module go3
 
 go 1.25.1
 
-require github.com/fatih/color v1.18.0
+require github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
 
 require (
 	github.com/k0kubun/pp v3.0.1+incompatible

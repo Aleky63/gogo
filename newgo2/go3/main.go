@@ -1,19 +1,25 @@
 package main
 
 import (
-	"go2/payments"
-	"go2/payments/methods"
+	"go3/payments"
+	"go3/payments/methods"
 
 	"github.com/k0kubun/pp"
 )
 
 func main() {
-	method := methods.NewCrypto()
+	method := methods.NewBank()
 	paymentModule := payments.NewPaymentModule(method)
 	paymentModule.Pay("Бургер", 5)
-	paymentModule.Pay("Телефон", 598)
-	paymentModule.Pay("Игрушка", 49)
+
+	idPhone := paymentModule.Pay("Телефон", 598)
+
+	idGame := paymentModule.Pay("Игрушка", 49)
+
+	paymentModule.Cancel((idPhone))
 
 	allInfo := paymentModule.AllInfo()
 	pp.Println("Все оплаты наши:", allInfo)
+	gameInfo := paymentModule.Info((idGame))
+	pp.Println("Game info:", gameInfo)
 }
