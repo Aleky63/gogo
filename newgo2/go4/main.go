@@ -24,6 +24,13 @@ func Pay(user *User, usd int) error {
 }
 
 func main() {
+	defer func() {
+		p := recover()
+		if p != nil {
+			fmt.Println("panika:", p)
+		}
+	}()
+
 	user := User{
 		Name:    "Donny",
 		Balance: 50,
