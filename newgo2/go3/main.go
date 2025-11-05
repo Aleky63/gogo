@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	method := methods.NewCrypto()
+	method := methods.NewPaypal()
 	paymentModule := payments.NewPaymentModule(method)
 	paymentModule.Pay("Бургер", 5)
 
