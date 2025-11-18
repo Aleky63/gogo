@@ -20,7 +20,8 @@ func Miner(
 
 		select {
 		case <-ctx.Done():
-			fmt.Println("Я шахтер номер:", n, "Мой рабочий день закончен!")
+
+			fmt.Println("-----------Я шахтер номер:", n, "Мой рабочий день закончен!")
 			return
 		default:
 

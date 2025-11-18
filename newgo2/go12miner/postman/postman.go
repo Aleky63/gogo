@@ -15,7 +15,7 @@ func Postman(ctx context.Context, wg *sync.WaitGroup, transferPoint chan<- strin
 		select {
 		case <-ctx.Done():
 
-			fmt.Println("Я почтальон номер:", n, "Мой рабочий день закончен!")
+			fmt.Println("--------Я почтальон номер:", n, "Мой рабочий день закончен!")
 			return
 		default:
 			fmt.Println("Я почтальон номер:", n, "Взял письмо!")
@@ -26,7 +26,7 @@ func Postman(ctx context.Context, wg *sync.WaitGroup, transferPoint chan<- strin
 
 			transferPoint <- mail
 
-			fmt.Println("Я почтальон номер:", n, "Передал письмо!")
+			fmt.Println("Я почтальон номер:", n, "Передал письмо!", mail)
 		}
 
 	}
