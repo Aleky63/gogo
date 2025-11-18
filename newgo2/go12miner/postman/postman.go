@@ -5,19 +5,17 @@ import (
 	"fmt"
 	"sync"
 	"time"
-
-	"github.com/fatih/color"
 )
 
-func Postman(ctx context.Context, wg *sync.WaitGroup, transferPoint <-chan string, n int, mail string) {
+func Postman(ctx context.Context, wg *sync.WaitGroup, transferPoint chan<- string, n int, mail string) {
 	defer wg.Done()
-	red := color.New(color.FgHiRed).SprintFunc()
+
 	for {
 
 		select {
 		case <-ctx.Done():
 
-			fmt.Println(red("Я почтальон номер:", n, "Мой рабочий день закончен!"))
+			fmt.Println("Я почтальон номер:", n, "Мой рабочий день закончен!")
 			return
 		default:
 			fmt.Println("Я почтальон номер:", n, "Взял письмо!")
@@ -28,7 +26,7 @@ func Postman(ctx context.Context, wg *sync.WaitGroup, transferPoint <-chan strin
 
 			transferPoint <- mail
 
-			fmt.Println(red("Я почтальон номер:"), n, "Передал письмо!")
+			fmt.Println("Я почтальон номер:", n, "Передал письмо!")
 		}
 
 	}
@@ -41,7 +39,7 @@ func PostmanPool(ctx context.Context, postmanCount int) <-chan string {
 
 	for i := 1; i <= postmanCount; i++ {
 		wg.Add(1)
-		go Postman(ctx, mailTransferPoint, i, postmanToMail(i))
+		go Postman(ctx, wg, mailTransferPoint, i, postmanToMail(i))
 	}
 
 	go func() {
