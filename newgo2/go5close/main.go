@@ -11,7 +11,7 @@ func main() {
 	transferPoint := make(chan int)
 
 	go func() {
-		iterations := 3 + rand.Intn(4)
+		iterations := 3 + rand.Intn(5)
 
 		for i := 1; i <= iterations; i++ {
 			transferPoint <- 10
