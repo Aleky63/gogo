@@ -29,6 +29,6 @@ func foo(ctx context.Context, minerCount int) {
 	coalTransferPoint := make(chan int)
 
 	for i := 1; i <= minerCount; i++ {
-		go Miner(coalTransferPoint, i, i*10)
+		go Miner(coalTransferPoint, i, i*20)
 	}
 }
