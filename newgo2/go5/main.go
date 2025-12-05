@@ -19,7 +19,7 @@ func mine(transferPoint chan int, n int) {
 }
 
 func main() {
-	transferPoint := make(chan int, 10)
+	transferPoint := make(chan int, 15)
 	coal := 0
 
 	initTime := time.Now()
