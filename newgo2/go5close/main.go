@@ -15,7 +15,7 @@ func main() {
 
 		for i := 1; i <= iterations; i++ {
 			transferPoint <- 10
-			time.Sleep(300 * time.Millisecond)
+			time.Sleep(500 * time.Millisecond)
 		}
 		close(transferPoint)
 	}()

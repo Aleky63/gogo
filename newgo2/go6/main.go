@@ -16,18 +16,20 @@ func main() {
 			intCh <- i
 			i++
 
-			time.Sleep(10 * time.Millisecond)
+			time.Sleep(1 * time.Second)
 		}
 
 	}()
 	go func() {
 		i := 1
 		for {
-			strCh <- "hiaWWWWW" + strconv.Itoa((i))
+			strCh <- "hirereearrfxXSrWW" + strconv.Itoa((i))
 			i++
 		}
 
 	}()
+
+	time.Sleep(5 * time.Second)
 
 	for {
 		select {
