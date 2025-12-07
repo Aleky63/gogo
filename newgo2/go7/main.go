@@ -19,7 +19,7 @@ func main() {
 		for {
 			messagechan1 <- Message{
 				Autor: "Tramp",
-				Text:  "Skazka",
+				Text:  "SkazkaTrampa",
 			}
 			time.Sleep((33 * time.Millisecond))
 		}
@@ -37,7 +37,7 @@ func main() {
 
 	start := time.Now()
 
-	for time.Since(start) < 3*time.Second {
+	for time.Since(start) < 2*time.Second {
 		select {
 		case msd1 := <-messagechan1:
 			fmt.Println("Я получил сообщение от:", msd1.Autor, "текс сообщения:", msd1.Text)
@@ -48,4 +48,5 @@ func main() {
 
 	}
 	fmt.Println("\n⏹️🤣  Время вышло — программа остановлена.😍")
+	fmt.Println("TIME.😍", time.Since(start))
 }

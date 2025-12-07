@@ -23,13 +23,11 @@ func main() {
 	go func() {
 		i := 1
 		for {
-			strCh <- "hirereearrfxXSrWW" + strconv.Itoa((i))
+			strCh <- "hirere55earrfxXSrWW--" + strconv.Itoa((i))
 			i++
 		}
 
 	}()
-
-	time.Sleep(5 * time.Second)
 
 	for {
 		select {
