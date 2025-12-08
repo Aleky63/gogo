@@ -20,7 +20,7 @@ func increase(wg *sync.WaitGroup) {
 
 func main() {
 	wg := &sync.WaitGroup{}
-	wg.Add(10)
+	wg.Add(11)
 
 	go increase(wg)
 	go increase(wg)
@@ -28,6 +28,7 @@ func main() {
 	go increase(wg)
 	go increase(wg)
 
+	go increase(wg)
 	go increase(wg)
 	go increase(wg)
 	go increase(wg)
@@ -36,5 +37,5 @@ func main() {
 
 	wg.Wait()
 	fmt.Println("num:", num.Load())
-	fmt.Println("----END-----")
+	fmt.Println("🤣--END--😊")
 }
