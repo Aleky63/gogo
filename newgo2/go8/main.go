@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"time"
+
+	"github.com/fatih/color"
 )
 
 func foo(ctx context.Context) {
@@ -26,13 +28,16 @@ func boo(ctx context.Context) {
 			fmt.Println(("BOO end 😒"))
 			return
 		default:
-			fmt.Println(("BOO"))
+			fmt.Println(("BOOOO"))
 		}
 
 		time.Sleep(200 * time.Millisecond)
 	}
 }
 func main() {
+
+	red := color.New(color.FgHiRed).SprintFunc()
+
 	parentContext, parentCancel := context.WithCancel(context.Background())
 
 	childContext, childCancel := context.WithCancel(parentContext)
@@ -42,6 +47,6 @@ func main() {
 	childCancel()
 	time.Sleep(1 * time.Second)
 	parentCancel()
-	time.Sleep(4 * time.Second)
-	fmt.Println("End---------------")
+	time.Sleep(3 * time.Second)
+	fmt.Println(red("😍😍😍__End__😍😍😍"))
 }
