@@ -12,7 +12,7 @@ var mtx sync.RWMutex
 
 func setLike(wg *sync.WaitGroup) {
 	defer wg.Done()
-	for i := 1; i < 500000; i++ {
+	for i := 1; i < 100000; i++ {
 		mtx.Lock()
 		likes++
 		mtx.Unlock()
@@ -22,7 +22,7 @@ func setLike(wg *sync.WaitGroup) {
 func getLike(wg *sync.WaitGroup) {
 	defer wg.Done()
 
-	for i := 1; i < 500000; i++ {
+	for i := 1; i < 100000; i++ {
 		mtx.RLock()
 		_ = likes
 		mtx.RUnlock()
