@@ -20,21 +20,23 @@ func main() {
 	minerContext, minerCancel := context.WithCancel(context.Background())
 	postmanContext, postmanCancel := context.WithCancel(context.Background())
 
+	initTime := time.Now()
+
 	go func() {
-		time.Sleep(5 * time.Second)
+		time.Sleep(3 * time.Second)
 		fmt.Println("🔔 Время работы шахтёров истекло — останавливаю добычу.")
 		minerCancel()
 	}()
 
 	go func() {
-		time.Sleep(4 * time.Second)
-		fmt.Println("📬 Время работы почтальонов истекло — останавливаю доставку.")
+		time.Sleep(5 * time.Second)
+		fmt.Println("👌 Время работы почтальонов истекло — останавливаю доставку.")
 		postmanCancel()
 	}()
 
-	coalTransferPoint := miner.MinerPool(minerContext, 2)
+	coalTransferPoint := miner.MinerPool(minerContext, 5)
 
-	mailTransferPoint := postman.PostmanPool(postmanContext, 2)
+	mailTransferPoint := postman.PostmanPool(postmanContext, 5)
 
 	wg := &sync.WaitGroup{}
 
@@ -54,6 +56,7 @@ func main() {
 	wg.Wait()
 
 	red := color.New(color.FgHiRed).SprintFunc()
+	green := color.New(color.FgHiGreen).SprintFunc()
 	fmt.Println(red("😊😊__СУММАРНО ДОБЫТЫЙ УГОЛЬ:", coal.Load()))
 
 	mtx.Lock()
@@ -62,4 +65,6 @@ func main() {
 
 	mtx.Unlock()
 
+	fmt.Println(green(" ❤️ __ЗАТРАЧЕННОЕ ВРЕМЯ:", time.Since(initTime)))
+	fmt.Println("------------")
 }
