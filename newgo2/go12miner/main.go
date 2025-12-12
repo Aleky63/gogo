@@ -65,6 +65,6 @@ func main() {
 
 	mtx.Unlock()
 
-	fmt.Println(green(" ❤️ __ЗАТРАЧЕННОЕ ВРЕМЯ:", time.Since(initTime)))
+	fmt.Println(green(" ❤️ __ ЗАТРАЧЕННОЕ ВРЕМЯ: ", time.Since(initTime)))
 	fmt.Println("------------")
 }
