@@ -15,9 +15,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		fmt.Println("ERROR;", err.Error())
-		return
+
+	} else {
+		fmt.Println("😍😍😍-OK-😍😍😍")
 	}
-	fmt.Println("😍😍😍-OK-😍😍😍")
 }
 
 func cancelHandler(w http.ResponseWriter, r *http.Request) {
@@ -28,23 +29,37 @@ func cancelHandler(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		fmt.Println("ERROR;", err.Error())
-		return
-	}
-	fmt.Println("🎈🎈🎈--OK--🎈🎈🎈")
-}
 
+	} else {
+		fmt.Println("😂😂😂--OK--😂😂😂")
+	}
+}
+func payHandler(w http.ResponseWriter, r *http.Request) {
+
+	str := "New pay processed!"
+	b := []byte(str)
+	_, err := w.Write(b)
+
+	if err != nil {
+		fmt.Println("ERROR;", err.Error())
+
+	} else {
+		fmt.Println("🎈🎈🎈--OK--🎈🎈🎈")
+	}
+}
 func main() {
 	red := color.New(color.FgHiRed).SprintFunc()
-	fmt.Println(red("--🚕🚓🚕--"))
+	fmt.Println(red("-----🚕🚓🚕-----"))
 
 	http.HandleFunc("/default", handler)
-	http.HandleFunc("/pay", cancelHandler)
+	http.HandleFunc("/pay", payHandler)
+	http.HandleFunc("/cancel", cancelHandler)
 
-	fmt.Println("Запускаю сервер🏦🏦🏦")
+	fmt.Println(red("Запускаю сервер🏦🏦🏦"))
 	err := http.ListenAndServe(":9091", nil)
 	if err != nil {
-		fmt.Println("ERRoooooOR;", err.Error())
+		fmt.Println("ERRoooooOR:", err.Error())
 
 	}
-
+	fmt.Println(red("ЗАКОНЧИЛА ПРОГРАММА ВЫПОЛНЕНИЕ"))
 }
