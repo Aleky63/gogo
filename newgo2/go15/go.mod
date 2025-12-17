@@ -1,4 +1,4 @@
-module httprequest
+module httpbodiget
 
 go 1.25.1
 
