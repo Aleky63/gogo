@@ -15,6 +15,10 @@ var money = 1000
 var bank = 0
 
 func payHandler(w http.ResponseWriter, r *http.Request) {
+	for k, v := range r.Header {
+		fmt.Println("k:", k, "---v:", v)
+	}
+
 	defer r.Body.Close()
 	httpRequestBody, err := io.ReadAll(r.Body)
 
