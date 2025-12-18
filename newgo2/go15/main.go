@@ -15,6 +15,11 @@ var money = 1000
 var bank = 0
 
 func payHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPatch {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+	fmt.Println("HTTP method:", r.Method)
 	for k, v := range r.Header {
 		fmt.Println("k:", k, "---v:", v)
 	}
