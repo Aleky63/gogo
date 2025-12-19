@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 
 	// "strconv"
 	// "strings"
@@ -20,6 +21,7 @@ type Payment struct {
 	Color       string `json:"color"`
 	Flag        bool   `json:"flag"`
 	Array       []int  `json:"array"`
+	Time        time.Time
 }
 
 func (p Payment) Println() {
@@ -36,6 +38,11 @@ var mtx = sync.Mutex{}
 var money = 1000
 var paymenHistory = make([]Payment, 0)
 
+type HttpResponse struct {
+	Money          int
+	PaymentHistory []Payment
+}
+
 func payHandler(w http.ResponseWriter, r *http.Request) {
 	var payment Payment
 
@@ -44,6 +51,7 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	payment.Time = time.Now()
 
 	payment.Println()
 
@@ -53,6 +61,22 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	paymenHistory = append(paymenHistory, payment)
+
+	httpResponse := HttpResponse{
+		Money:          money,
+		PaymentHistory: paymenHistory,
+	}
+
+	b, err := json.Marshal(httpResponse)
+	if err != nil {
+		fmt.Println("err:", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+	if _, err := w.Write(b); err != nil {
+		fmt.Println("err:", err)
+		return
+	}
 
 	red := color.New(color.FgHiRed).SprintFunc()
 	yellow := color.New(color.FgHiYellow).SprintFunc()
