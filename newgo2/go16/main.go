@@ -35,7 +35,7 @@ func (p Payment) Println() {
 }
 
 var mtx = sync.Mutex{}
-var money = 1000
+var money = 10000
 var paymenHistory = make([]Payment, 0)
 
 type HttpResponse struct {
@@ -44,6 +44,12 @@ type HttpResponse struct {
 }
 
 func payHandler(w http.ResponseWriter, r *http.Request) {
+   fooParam := r.URL.Query().Get("foo")
+   booParam := r.URL.Query().Get("boo")
+
+fmt.Println("fooParam:", fooParam)
+fmt.Println("booParam:", booParam)
+
 	var payment Payment
 
 	if err := json.NewDecoder(r.Body).Decode(&payment); err != nil {
@@ -92,6 +98,8 @@ func main() {
 	fmt.Println("-----I🚓I-----")
 
 	http.HandleFunc("/pay", payHandler)
+
+	
 
 	if err := http.ListenAndServe(":9091", nil); err != nil {
 		fmt.Println("ERROR  during HTTP server operation:", err)
