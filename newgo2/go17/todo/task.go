@@ -18,18 +18,14 @@ func NewTask(title string, description string) Task {
 		Completed:   false,
 
 		CreatedAt:   time.Now(),
-		CompletedAt: nil,
+	    CompletedAt: nil,
 	}
 }
 
 func (t *Task) Complete() {
 	completeTime := time.Now()
 
-	t.Completed = true
-	t.CompletedAt = &completeTime
+	t.Completed   = true
+	t. CompletedAt = &completeTime
 }
 
-func (t *Task) Uncomplete() {
-	t.Completed = false
-	t.CompletedAt = nil
-}
