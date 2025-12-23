@@ -39,7 +39,7 @@ func (l *List) ListNotCompletedTasks() map[string]Task {
 			notCompletedTasks[title] = task
 		}
 	}
-return notCompletedTasks
+	return notCompletedTasks
 }
 
 func (l *List) CompleteTask(title string) error {
