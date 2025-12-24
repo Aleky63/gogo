@@ -1,8 +1,10 @@
 package http
 
 import (
+	"encoding/json"
 	"net/http"
 	"restapi/todo"
+	"time"
 )
 
 type HTTPHandlers struct {
@@ -29,6 +31,20 @@ failed:
 */
 
 func (h *HTTPHandlers) HandleCreateTask(w http.ResponseWriter, r *http.Request){
+
+  var taskDTO TaskDTO
+    if err := json.NewDecoder(r.Body).Decode(&taskDTO);err !=nil{
+      errDTO :=ErrorDTO{
+        Message: err.Error(),
+           Time: time.Now(),
+      }
+http.Error(w,errDTO.ToString(), http.StatusBadRequest)
+return
+  }
+
+
+
+
 
 }
 
