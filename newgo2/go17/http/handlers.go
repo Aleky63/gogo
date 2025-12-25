@@ -2,6 +2,8 @@ package http
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"net/http"
 	"restapi/todo"
 	"time"
@@ -42,11 +44,44 @@ http.Error(w,errDTO.ToString(), http.StatusBadRequest)
 return
   }
 
-
-
-
-
+if err:= taskDTO.ValidateForCreater();err !=nil{
+  errDTO :=ErrorDTO{
+  Message :err.Error(),
+	Time :   time.Now(),
 }
+http.Error(w,errDTO.ToString(), http.StatusBadRequest)
+  }
+
+  todoTask := todo.NewTask(taskDTO.Title,taskDTO.Descripion)
+     if err:= h.todoList.AddTask(todoTask); err!=nil{
+  errDTO := ErrorDTO{
+  Message :err.Error(),
+	Time :   time.Now(),
+}
+
+
+    if errors.Is(err,todo.ErrTaskAlreadyExists) {
+      http.Error(w,errDTO.ToString(),http.StatusConflict)
+    }else{
+ http.Error(w,errDTO.ToString(),http.StatusInternalServerError)
+    }
+return
+  }
+
+ b, err:= json.MarshalIndent(e,"","    ")
+	  if err !=nil{
+		panic(err)
+	  }
+	 w.WriteHeader(http.StatusCreated)
+
+if _, err :=w.Write(b);err !=nil{
+fmt.Println("failed to write http response:",err)
+  
+}
+}
+
+
+
 
 /*
 pattern: /tasks/{title}
