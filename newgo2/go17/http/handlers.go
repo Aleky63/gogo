@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"restapi/todo"
 	"time"
+
+	"github.com/gorilla/mux"
 )
 
 type HTTPHandlers struct {
@@ -50,7 +52,10 @@ if err:= taskDTO.ValidateForCreater();err !=nil{
 	Time :   time.Now(),
 }
 http.Error(w,errDTO.ToString(), http.StatusBadRequest)
+return
   }
+
+
 
   todoTask := todo.NewTask(taskDTO.Title,taskDTO.Descripion)
      if err:= h.todoList.AddTask(todoTask); err!=nil{
@@ -67,21 +72,19 @@ http.Error(w,errDTO.ToString(), http.StatusBadRequest)
     }
 return
   }
-
- b, err:= json.MarshalIndent(e,"","    ")
-	  if err !=nil{
+b,err :=json.MarshalIndent(todoTask,"","   ")
+     if err !=nil{
 		panic(err)
 	  }
-	 w.WriteHeader(http.StatusCreated)
 
+ w.WriteHeader(http.StatusCreated)
 if _, err :=w.Write(b);err !=nil{
 fmt.Println("failed to write http response:",err)
-  
+  return
+ }
+
+
 }
-}
-
-
-
 
 /*
 pattern: /tasks/{title}
@@ -98,8 +101,42 @@ failed:
 */
 
 func (h *HTTPHandlers) HandleGetTask(w http.ResponseWriter, r *http.Request){
+         title:=  mux.Vars(r)["title"]
 
+         task, err := h.todoList.GetTask(title)
+
+
+if err!=nil{
+            errDTO := ErrorDTO{
+  Message :err.Error(),
+	Time :   time.Now(),
 }
+  if errors.Is(err, todo.ErrTaskNotFound) {
+      http.Error(w, errDTO.ToString(), http.StatusNotFound)
+    }else{
+ http.Error(w, errDTO.ToString(), http.StatusInternalServerError)
+    }
+return
+  }
+  b, err:= json.MarshalIndent(task,"","    ")
+	  if err !=nil{
+		panic(err)
+	  }
+
+
+w.WriteHeader(http.StatusOK)
+
+
+if _, err :=w.Write(b);err !=nil{
+fmt.Println("failed to write http response:",err)
+  return
+ }
+ }
+
+
+
+
+
 
 /*
 pattern: /tasks
