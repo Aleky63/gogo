@@ -39,16 +39,16 @@ func (l *List) ListTasks() map[string]Task {
 	return tmp
 }
 
-func (l *List) ListNotCompletedTasks() map[string]Task {
+func (l *List) ListUnCompletedTasks() map[string]Task {
 
-	notCompletedTasks := make(map[string]Task)
+	unCompletedTasks := make(map[string]Task)
 
 	for title, task := range l.tasks {
 		if !task.Completed {
-			notCompletedTasks[title] = task
+			unCompletedTasks[title] = task
 		}
 	}
-	return notCompletedTasks
+	return unCompletedTasks
 }
 
 func (l *List) CompleteTask(title string) error {

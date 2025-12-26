@@ -6,6 +6,15 @@ import (
 	"time"
 )
 
+
+
+type CompleteTaskDTO struct {
+Complete bool
+}
+
+
+
+
 type TaskDTO struct {
 	Title      string
 	Descripion string
