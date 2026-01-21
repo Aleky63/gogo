@@ -13,6 +13,6 @@ func main() {
 http.HandleFunc("/tasks/",handler)
 
 if err := http.ListenAndServe(":9091", nil); err != nil {
-		fmt.Println("ERRORR :", err)
+		fmt.Println("ERROR :", err)
 	}
 }
