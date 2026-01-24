@@ -17,7 +17,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("ERROR;", err.Error())
 
 	} else {
-		fmt.Println("😍😍😍-OK-😍😍😍")
+		fmt.Println("😍😍😍-OK-😍😍")
 	}
 }
 
@@ -43,7 +43,7 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("ERROR;", err.Error())
 
-	} else {
+	} else {€
 		fmt.Println("🎈🎈🎈--OK--🎈🎈🎈")
 	}
 }
