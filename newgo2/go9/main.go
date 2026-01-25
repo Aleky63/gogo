@@ -26,7 +26,7 @@ func main() {
 	wg.Add(1)
 	go postman(wg, "AUTO")
 	wg.Add(1)
-	go postman(wg, "🎈ORORORO")
+	go postman(wg, "🎈OR")
 	wg.Wait()
 
 	fmt.Println("😊😊----END-----🤣🤣")
