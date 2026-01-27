@@ -15,108 +15,131 @@ type PaymentInfo struct {
 	Cancelled   bool
 }
 
-type PaymentModuleWithSlice struct {
-	s []PaymentInfo
+ type PaymentModuleWithSlice struct {
+ 	s []PaymentInfo
 }
-
-func (m *PaymentModuleWithSlice) AddInfo(info PaymentInfo) {
-	m.s = append(m.s, info)
-}
-func (m *PaymentModuleWithSlice) GetInfo(id int) PaymentInfo {
-	for _, info := range m.s {
-		if info.ID == id {
-			return info
-		}
-	}
-	return PaymentInfo{}
-}
-
-// ---------------------------------
 
 type PaymentModuleWithMap struct {
-	m map[int]PaymentInfo
+ 	m map[int]PaymentInfo
 }
 
-func (m *PaymentModuleWithMap) AddInfo(info PaymentInfo) {
-	m.m[info.ID] = info
+func main(){
+
+
+
 }
 
-func (m *PaymentModuleWithMap) GetInfo(id int) PaymentInfo {
-	info, ok := m.m[id]
-	if !ok {
-		return PaymentInfo{}
-	}
-	return info
-}
 
-func main() {
 
-	pSlice := PaymentModuleWithSlice{}
-	pMap := PaymentModuleWithMap{
-		m: make(map[int]PaymentInfo),
-	}
-	//  добавляем информацию в слайс и мапу
-	interations := 5000
+// type PaymentInfo struct {
+// 	ID          int
+// 	Description string
+// 	Usd         int
+// 	Cancelled   bool
+// }
 
-	before := time.Now()
+// type PaymentModuleWithSlice struct {
+// 	s []PaymentInfo
+// }
 
-	for i := range interations {
-		pMap.AddInfo(PaymentInfo{
+// func (m *PaymentModuleWithSlice) AddInfo(info PaymentInfo) {
+// 	m.s = append(m.s, info)
+// }
+// func (m *PaymentModuleWithSlice) GetInfo(id int) PaymentInfo {
+// 	for _, info := range m.s {
+// 		if info.ID == id {
+// 			return info
+// 		}
+// 	}
+// 	return PaymentInfo{}
+// }
 
-			ID:          i,
-			Description: strconv.Itoa(i),
-		})
+// // ---------------------------------
 
-	}
-	mapAddTime := time.Since(before)
+// type PaymentModuleWithMap struct {
+// 	m map[int]PaymentInfo
+// }
 
-	before = time.Now()
+// func (m *PaymentModuleWithMap) AddInfo(info PaymentInfo) {
+// 	m.m[info.ID] = info
+// }
 
-	for i := range interations {
-		pSlice.AddInfo(PaymentInfo{
+// func (m *PaymentModuleWithMap) GetInfo(id int) PaymentInfo {
+// 	info, ok := m.m[id]
+// 	if !ok {
+// 		return PaymentInfo{}
+// 	}
+// 	return info
+// }
 
-			ID:          i,
-			Description: strconv.Itoa(i),
-		})
+// func main() {
 
-	}
-	sliceAddTime := time.Since(before)
-	// --------------------
-	//  ищем информацию
+// 	pSlice := PaymentModuleWithSlice{}
+// 	pMap := PaymentModuleWithMap{
+// 		m: make(map[int]PaymentInfo),
+// 	}
+// 	//  добавляем информацию в слайс и мапу
+// 	interations := 5000
 
-	before = time.Now()
+// 	before := time.Now()
 
-	for i := range interations {
+// 	for i := range interations {
+// 		pMap.AddInfo(PaymentInfo{
 
-		info := pMap.GetInfo(i)
-		_ = info
+// 			ID:          i,
+// 			Description: strconv.Itoa(i),
+// 		})
 
-	}
-	mapGetTime := time.Since(before)
+// 	}
+// 	mapAddTime := time.Since(before)
 
-	before = time.Now()
+// 	before = time.Now()
 
-	for i := range interations {
+// 	for i := range interations {
+// 		pSlice.AddInfo(PaymentInfo{
 
-		info := pSlice.GetInfo(i)
-		_ = info
+// 			ID:          i,
+// 			Description: strconv.Itoa(i),
+// 		})
 
-	}
-	sliceGetTime := time.Since(before)
+// 	}
+// 	sliceAddTime := time.Since(before)
+// 	// --------------------
+// 	//  ищем информацию
 
-	proba := "---PROBA---"
-	blue := color.New(color.FgHiBlue).SprintFunc()
-	red := color.New(color.FgHiRed).SprintFunc()
-	fmt.Println(proba)
+// 	before = time.Now()
 
-	i1s := pSlice.GetInfo((10))
-	i2m := pMap.GetInfo((10))
-	fmt.Println(i1s)
-	fmt.Println(i2m)
+// 	for i := range interations {
 
-	fmt.Println(red("slice add-- ", sliceAddTime))
-	fmt.Println(blue("map add-- ", mapAddTime))
+// 		info := pMap.GetInfo(i)
+// 		_ = info
 
-	fmt.Println(red("slice get-- ", sliceGetTime))
-	fmt.Println(blue("map get-- ", mapGetTime))
-}
+// 	}
+// 	mapGetTime := time.Since(before)
+
+// 	before = time.Now()
+
+// 	for i := range interations {
+
+// 		info := pSlice.GetInfo(i)
+// 		_ = info
+
+// 	}
+// 	sliceGetTime := time.Since(before)
+
+// 	proba := "---PROBA---"
+// 	blue := color.New(color.FgHiBlue).SprintFunc()
+// 	red := color.New(color.FgHiRed).SprintFunc()
+// 	fmt.Println(proba)
+
+// 	i1s := pSlice.GetInfo((10))
+// 	i2m := pMap.GetInfo((10))
+// 	fmt.Println(i1s)
+// 	fmt.Println(i2m)
+
+// 	fmt.Println(red("slice add-- ", sliceAddTime))
+// 	fmt.Println(blue("map add-- ", mapAddTime))
+
+// 	fmt.Println(red("slice get-- ", sliceGetTime))
+// 	fmt.Println(blue("map get-- ", mapGetTime))
+// }
