@@ -8,13 +8,13 @@ import (
 )
 
 func main() {
-	method := methods.NewPaypal()
+	method := methods.NewBank()
 	paymentModule := payments.NewPaymentModule(method)
 	paymentModule.Pay("Бургер", 5)
 
-	idPhone := paymentModule.Pay("Телефон", 598)
+	idPhone := paymentModule.Pay("Телефон", 596)
 
-	idGame := paymentModule.Pay("Игрушка", 49)
+	idGame := paymentModule.Pay("Игрушка", 149)
 
 	paymentModule.Cancel((idPhone))
 
@@ -22,4 +22,7 @@ func main() {
 	pp.Println("Все оплаты наши:", allInfo)
 	gameInfo := paymentModule.Info((idGame))
 	pp.Println("Game info:", gameInfo)
+
+	
 }
+

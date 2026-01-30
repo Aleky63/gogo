@@ -13,7 +13,7 @@ func NewCrypto() Crypto {
 
 func (c Crypto) Pay(usd int) int {
 	fmt.Println("Оплата криптой!")
-	fmt.Println("Размер оплаты:", usd, "USDT")
+	fmt.Println("Размер оплаты криптой:", usd, "USDT")
 
 	return rand.Int()
 }
