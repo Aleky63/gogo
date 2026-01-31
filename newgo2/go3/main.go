@@ -12,7 +12,7 @@ func main() {
 	paymentModule := payments.NewPaymentModule(method)
 	paymentModule.Pay("Бургер", 5)
 
-	idPhone := paymentModule.Pay("Телефон", 596)
+	idPhone := paymentModule.Pay("Телефон", 5926)
 
 	idGame := paymentModule.Pay("Игрушка", 149)
 
