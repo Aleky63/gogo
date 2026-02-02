@@ -1,10 +1,10 @@
 package pets
 
 import (
-
 	"fmt"
-	// "golang.org/x/text/cases"
-	// "golang.org/x/text/language"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type Eater interface {
@@ -19,11 +19,30 @@ type Named interface {
 type EaterWalker interface{
 	Eater
 	Walker
+	Named
+}
+
+type Animal struct {
+	Name string
+}
+
+type ActionError struct{
+	Name string
+	Reason string
 }
 
 
+func (e *ActionError) Error()string{
+	return  fmt.Sprintf("%s cannot perform the action: %s", e.Name, e.Reason)
 
+}
 
+func (a *Animal) GetName() string {
+
+	caser := cases.Title(language.English)
+
+	return caser.String( a.Name)
+}
 
 
 func newError(msg string, err error) error {

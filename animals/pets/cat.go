@@ -1,12 +1,9 @@
 package pets
 
-import (
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
-)
-
 type Cat struct {
-	Name string
+	Animal
+	Age int
+	IsAsleep bool
 }
 
 func (c *Cat) Eat(amount int) (int, error) {
@@ -17,10 +14,4 @@ func (c *Cat) Eat(amount int) (int, error) {
 }
 func (c *Cat) Walk() string {
 	return "Cat is walking!!🐈‍⬛🐈‍⬛🐈‍⬛"
-}
-func (c *Cat) GetName() string {
-
-	caser := cases.Title(language.English)
-
-	return caser.String( c.Name)
 }

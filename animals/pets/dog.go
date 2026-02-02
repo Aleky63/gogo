@@ -3,7 +3,10 @@ package pets
 
 
 type Dog struct {
-	Name string
+	Animal
+	Age int
+	Weight int
+	IsAsleep bool
 }
 
 func (c *Dog) Eat(amount int) (int, error) {
