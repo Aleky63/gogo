@@ -32,7 +32,7 @@ type ActionError struct{
 }
 
 
-func (e *ActionError) Error()string{
+func (e *ActionError) Error() string{
 	return  fmt.Sprintf("%s cannot perform the action: %s", e.Name, e.Reason)
 
 }

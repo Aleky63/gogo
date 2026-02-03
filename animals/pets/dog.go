@@ -1,15 +1,17 @@
 package pets
 
-
-
 type Dog struct {
 	Animal
-	Age int
-	Weight int
+	Age      int
+	Weight   int
 	IsAsleep bool
 }
 
-func (c *Dog) Eat(amount int) (int, error) {
+func (d *Dog) Eat(amount int) (int, error) {
+	
+	if d.IsAsleep {
+		return 0, &ActionError{Name: d.GetName(), Reason: "it is asleep"}
+	}
 	if amount > 10 {
 		return 0, newError("Dog can't eat that much", nil)
 	}

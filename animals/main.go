@@ -14,6 +14,7 @@ red := color.New(color.FgRed).SprintFunc()
 
 	Animal: pets.Animal {Name: "mr.Buttons"},
 	Age: 7,
+	IsAsleep: true,
 	}
 	myDog := pets.Dog{
 		 Animal: pets.Animal {Name: "Tramp"},
@@ -67,7 +68,7 @@ func displayInfo(i interface{}){
 	case pets.Cat:
 		fmt.Println("This is a Cat named:",v.Name,"and it is",v.Age,"years old")
 	case pets.Dog:
-		fmt.Println("This is a Dog named:",v.Name,"and it is",v.Age,"years old",v.Weight,"and weight")
+		fmt.Println("This is a Dog named:",v.Name,"and it is",v.Age,"years old","and weight" ,v.Weight, "kg")
 	default:
 		fmt.Println("This is unknowm")
 	}
