@@ -18,5 +18,5 @@ func (c *Cat) Eat(amount int) (int, error) {
 	return amount, nil
 }
 func (c *Cat) Walk() string {
-	return "Cat is walking!!🐈‍⬛🐈‍⬛🐈‍⬛"
+	return "Cat is walking!!🐈‍⬛🐈‍⬛"
 }
