@@ -12,7 +12,7 @@ func (c *Cat) Eat(amount int) (int, error) {
 		return 0, &ActionError{Name: c.GetName(), Reason: "it is asleep"}
 	}
 
-	if amount > 4 {
+	if amount > 5 {
 		return 0, newError("Cat can't eat that much", nil)
 	}
 	return amount, nil

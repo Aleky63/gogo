@@ -19,7 +19,7 @@ red := color.New(color.FgRed).SprintFunc()
 	myDog := pets.Dog{
 		 Animal: pets.Animal {Name: "Tramp"},
 		Age: 8,
-		Weight: 16,
+		Weight: 15,
 	}
 
 fmt.Println(red("Мой кот:", myCat.Name))

@@ -23,7 +23,7 @@ func getScore() (int, error){
 		return 0, errors.New("input error: please enter the whole scoreber")
 	}
 
-	if score <0 ||  score > 100 {
+	if score <0 ||  score >= 101 {
 return 0, errors.New("the score should be in the range from 0 to 100 inclusive.")
 	}
 
