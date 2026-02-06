@@ -22,7 +22,7 @@ fmt.Println(input)
 
 var x string
 switch {
-	case input > 23 && input < 6 :
+	case input > 23 && input < 7 :
 	x = "Ночь "
 	case input < 12 :
 	x = "Утро " 
