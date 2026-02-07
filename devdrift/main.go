@@ -1,6 +1,8 @@
 package main
 
-var devices = []dv.devices{
+import dv "devdrift/device" // ← только так Go найдёт ваш пакет
+
+var devices = []dv.Device{
 
 	dv.Pc{dv.Cpu{
 		Prod: "Intel",
@@ -13,5 +15,7 @@ var devices = []dv.devices{
 }
 
 func main() {
-
+for _, dvc:= range devices {
+	dvc.Off()
+}
 }
