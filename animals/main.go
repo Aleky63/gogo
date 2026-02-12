@@ -27,7 +27,7 @@ fmt.Println(red("Мой пес:", myDog.Name))
 
 
 var feedToCat int = 2
-var feedToDog int = 6
+var feedToDog int = 7
 
 catFed, err := feed (&myCat, feedToCat)
 
