@@ -6,8 +6,15 @@ import (
 	"github.com/fatih/color"
 )
 
-func main() {
 
+
+func greet (name string){
+	fmt.Println(name,"!!!")
+}
+
+
+func main() {
+greet("Tramp")
 
 var (
 red = color.New(color.FgHiRed).SprintFunc()
