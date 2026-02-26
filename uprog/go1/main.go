@@ -23,6 +23,23 @@ blue = color.New(color.FgHiBlue).SprintFunc()
 )
 
 	fmt.Println (red(555) + blue (" dfdfdfdefd  "))
+
+
+for i := 0; i <= 10; i++ {
+	if i%2 !=0 {
+	continue
+}
+fmt.Println(i)
+}
+
+type S struct{
+	field string 
+	a,b,c int
+}
+data :=S{}
+data =S{field: "Tramp"}
+
+fmt.Println(data)
 }
 
 
