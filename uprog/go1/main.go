@@ -27,10 +27,36 @@ func ( coord *Coordinate) shiftBy(x, y int)  {
 } 
 
 
+type Direction byte
+
+const (
+	North Direction =iota
+	East
+	South
+	West
+)
+
+
+func(d Direction) String() string {
+switch d {
+
+case North:
+	return "North"
+case South:
+	return "South"
+case East:
+	return "East"
+case West:
+	return "West"
+default:
+	return "other direction"
+	
+   }
+}
+
+
 func main() {
 greet("Tramp")
-
-
 
 	fmt.Println (red(555) + blue (" dfdfdfdefd  "))
 
@@ -54,7 +80,13 @@ fmt.Println(data)
 
 coord := Coordinate{5,5}
 coord.shiftBy(1, 1)
+coord.shiftBy(1, 1)
+coord.shiftBy(1, 1)
 fmt.Println(coord)
+
+
+x := East.String() 
+fmt.Println(x)
 
 }
 
