@@ -45,7 +45,7 @@ func main() {
 			players[p] = Messi{
 				Power:   rand.Intn(10),
 				Stamina: rand.Intn(10),
-				Height:  1.75,
+				Height:  1.65,
 			}
 		}
 
