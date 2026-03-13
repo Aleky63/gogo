@@ -13,7 +13,7 @@ func main() {
 	red := color.New(color.FgRed).SprintFunc()
 	myCat := pets.Cat{
 		Animal:   pets.Animal{Name: "mr.Buttons"},
-		Age:      7,
+		Age:      8,
 		IsAsleep: true,
 	}
 	myDog := pets.Dog{
@@ -68,3 +68,5 @@ func displayInfo(i interface{}) {
 		fmt.Println("This is unknowm")
 	}
 }
+
+// https://www.youtube.com/watch?v=RyTdDXnqHts
