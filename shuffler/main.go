@@ -62,6 +62,6 @@ func main() {
 	case correct >= int(float64(total)*0.6):
 		color.Yellow("🙂 Неплохо!")
 	default:
-		color.Red("😅 Пора повторить карту мира!")
+		color.Red("😅 Пора заново повторить карту мира!")
 	}
 }
