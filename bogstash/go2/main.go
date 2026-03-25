@@ -7,10 +7,9 @@ import (
 )
 
 func main() {
-
-	var coffeName = "Expresso"
-	var size = "Medium"
-	price := 3.99
+	coffeName := "Expresso"
+	size := "Medium"
+	price := 2.99
 
 	color.Blue("QCQCWDSFDVVFVVS")
 
