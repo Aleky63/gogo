@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/fatih/color"
 )
 
@@ -11,11 +12,11 @@ func main() {
 	ready := true
 	count := 5
 
-	fmt.Printf("Type is: \n%s\n%T\n%T\n%T\n%T\n\n", name, name, price, ready, count)
+	fmt.Printf("Type is: \n%s\n%s\n%T\n%T\n%T\n\n", name, name, price, ready, count)
 
-	name = "BBBBBBBBBBBBB"
+	name = "Trampppp"
 
 	magenta := color.New(color.FgMagenta).PrintfFunc()
 
-	magenta("Type is new: \n%s\n%T\n%T\n%T\n%T\n", name, name, price, ready, count)
+	magenta("Type is new: \n%s\n%s\n%T\n%T\n%T\n", name, name, price, ready, count)
 }
