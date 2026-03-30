@@ -18,4 +18,7 @@ func main() {
 
 	magenta := color.New(color.FgMagenta).PrintfFunc()
 	magenta("Type is new: \n%s\n%s\n%T\n%T\n%T\n", name, name, price, ready, count)
+
+	color.RGB(255, 128, 0).Println("foreground orange")
+	color.
 }
