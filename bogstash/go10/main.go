@@ -8,11 +8,13 @@ import (
 
 func printDrinkInfo(name string, drink string, price float64) {
 	red := color.New(color.FgRed).SprintFunc()
-	info := "%s's favorite drink is %s and it's price is %s\n	"
+	info := "%s's favorite drink is %s and it's price is %s\n"
 
 	fmt.Printf(info, name, drink, red(fmt.Sprintf("$%.2f", price)))
 }
 
 func main() {
 	printDrinkInfo("Tramp", "Chay", 4.06)
+	printDrinkInfo("Putin", "CC", 4.06)
+	printDrinkInfo("Kim", "Pt", 4.05)
 }
