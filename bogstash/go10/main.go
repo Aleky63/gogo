@@ -11,9 +11,8 @@ func printDrinkInfo(name string, drink string, price float64) {
 	info := "%s's favorite drink is %s and it's price is %s\n	"
 
 	fmt.Printf(info, name, drink, red(fmt.Sprintf("$%.2f", price)))
-
 }
-func main() {
-	printDrinkInfo("Tramp", "Chay", 4.66)
 
+func main() {
+	printDrinkInfo("Tramp", "Chay", 4.06)
 }
