@@ -28,7 +28,7 @@ func main() {
 	magenta("Type is new: \n%s\n%T\n%T\n%T\n%T\n ", name, name, price, ready, count)
 
 	red := color.New(color.FgRed).PrintfFunc()
-	red("\nPrice of the coffee is: %.2f\n", price)
+	red("\nPrice of the coffee is: %.5f\n", price)
 
 	total := price * float64(count)
 
@@ -37,7 +37,7 @@ func main() {
 	const weekRewardPoints = 10
 	fmt.Printf("SUM %T\n", weekRewardPoints)
 
-	var totalRewardPoints float64 = 302.3
+	var totalRewardPoints float64 = 102.3
 	totalRewardPoints = totalRewardPoints + weekRewardPoints
 	fmt.Println(totalRewardPoints)
 	fmt.Println(customerName, tableNumber, isReadyToPay)

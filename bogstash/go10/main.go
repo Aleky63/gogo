@@ -14,7 +14,8 @@ func printDrinkInfo(name string, drink string, price float64) {
 }
 
 func main() {
-	printDrinkInfo("Tramp", "Chay", 4.06)
-	printDrinkInfo("Putin", "CC", 4.06)
-	printDrinkInfo("Kim", "Pt", 4.05)
+	printDrinkInfo("Tramp", "Chay", 4.09)
+	printDrinkInfo("Putin", "CC", 2.06)
+	printDrinkInfo("Kim", "Pt", 3.05)
+	printDrinkInfo("Kimfff", "Pdfdt", 4.95)
 }
