@@ -28,7 +28,7 @@ func main() {
 	magenta("Type is new: \n%s\n%T\n%T\n%T\n%T\n ", name, name, price, ready, count)
 
 	red := color.New(color.FgRed).PrintfFunc()
-	red("\nPrice of the coffee is: %.5f\n", price)
+	red("\nPrice of the coffee is: %.3f\n", price)
 
 	total := price * float64(count)
 
