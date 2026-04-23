@@ -8,8 +8,10 @@ import (
 
 type Auto interface {
 	StepOnGas()
-	// StepOnBrake()
-	// Bibi()
+	StepOnBrake()
+}
+type Honker interface {
+	Bibi()
 }
 type (
 	Skoda struct{}
@@ -21,13 +23,29 @@ func (b BMW) StepOnGas() {
 	fmt.Println("Я BMW! 55555!")
 }
 
+func (b BMW) StepOnBrake() {
+	fmt.Println("Я BMW! торможу!")
+}
+
+func (b BMW) Bibi() {
+	fmt.Println("Я BMW! бибибика!")
+}
+
 func (s Skoda) StepOnGas() {
 	fmt.Println("Я Шкода! 33333!")
 }
 
-// func (s YAZ) StepOnGas() {
-// 	fmt.Println("Я YAZ!  😍YYYYYYYYYYYYYYYYYYYYYYYY!")
-// }
+func (s Skoda) StepOnBrake() {
+	fmt.Println("Я Шкода! торможу!")
+}
+
+func (y YAZ) StepOnGas() {
+	fmt.Println("Я YAZ!  😍YYYYYYYYYYYYYYYYYYYYYYYY!")
+}
+
+func (y YAZ) StepOnBrake() {
+	fmt.Println("Я YAZ!  😍торможжжжу!")
+}
 
 func ride(auto Auto) {
 	red := color.New(color.FgHiRed).SprintFunc()
@@ -36,13 +54,19 @@ func ride(auto Auto) {
 	fmt.Println("Я садюсь в авто")
 	fmt.Println("Я жму на газ")
 	auto.StepOnGas()
+	auto.StepOnBrake()
+
+	if h, ok := auto.(Honker); ok {
+		h.Bibi()
+	}
 }
 
 func main() {
 	bmw := BMW{}
 	skoda := Skoda{}
+	yaz := YAZ{}
 
-	// skoda.StepOnGas()
 	ride(bmw)
 	ride(skoda)
+	ride(yaz)
 }
