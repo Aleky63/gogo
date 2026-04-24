@@ -17,10 +17,12 @@ func NewPaymentModule(paymentMethod PaymentMethod) *PaymentModule {
 
 func (p PaymentModule) Pay(description string, usd int) int {
 	id := p.paymentMethod.Pay(usd)
-	info := PaymentInfo {
-	Description: description,
-	Usd:  usd,
-	Cancelled:false,
+
+	info := PaymentInfo{
+		Description: description,
+		Usd:         usd,
+		Cancelled:   false,
+	}
 }
 
 func (p PaymentModule) Cancel() {}
