@@ -70,3 +70,5 @@ func main() {
 	ride(skoda)
 	ride(yaz)
 }
+
+// https://www.youtube.com/watch?v=4xST8IWJFZc
