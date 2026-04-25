@@ -1,54 +1,27 @@
 package main
 
 import (
-	"fmt"
+	"go3/payments"
+	"go3/payments/methods"
 
 	"github.com/k0kubun/pp"
 )
 
-type PaymentInfo struct {
-	ID          int
-	Description string
-	Usd         int
-	Cancelled   bool
-}
-
-type PaymentModuleWithMap struct {
-	m map[int]PaymentInfo
-}
-
-func (m *PaymentModuleWithMap) AddInfo(info PaymentInfo) {
-	m.m[info.ID] = info
-}
-
-func (m *PaymentModuleWithMap) GetInfo(id int) PaymentInfo {
-	info, ok := m.m[id]
-	if !ok {
-		return PaymentInfo{}
-	}
-	return info
-}
-
 // ------------------------
 
 func main() {
-	info1 := PaymentInfo{
-		ID:          10,
-		Description: "Kasha",
-		Usd:         5,
-		Cancelled:   false,
-	}
+	method := methods.NewBank()
+	paymentModule := payments.NewPaymentModule(method)
+	paymentModule.Pay("бургер", 5)
 
-	// pSlice := PaymentModuleWithSlice{}
-	pMap := PaymentModuleWithMap{
-		m: make(map[int]PaymentInfo),
-	}
+	idPhone := paymentModule.Pay("телефон", 666)
+	idGame := paymentModule.Pay("игрушка", 120)
 
-	pMap.AddInfo(info1)
+	paymentModule.Cancel(idPhone)
 
-	pp.Println("pMap", pMap)
+	allInfo := paymentModule.AllInfo()
+	pp.Println("Все наши оплаты", allInfo)
 
-	i2 := pMap.GetInfo((10))
-
-	fmt.Println("i2", i2)
+	gameInfo := paymentModule.Info(idGame)
+	pp.Println("Game info", gameInfo)
 }
