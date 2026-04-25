@@ -13,25 +13,6 @@ type PaymentInfo struct {
 	Cancelled   bool
 }
 
-// type PaymentModuleWithSlice struct {
-// 	s []PaymentInfo
-// }
-
-// func (m *PaymentModuleWithSlice) AddInfo(info PaymentInfo) {
-// 	m.s = append(m.s, info)
-// }
-
-// func (m *PaymentModuleWithSlice) GetInfo(id int) PaymentInfo {
-// 	for _, info := range m.s {
-// 		if info.ID == id {
-// 			return info
-// 		}
-// 	}
-// 	return PaymentInfo{}
-// }
-
-// ------------------------------
-
 type PaymentModuleWithMap struct {
 	m map[int]PaymentInfo
 }
@@ -63,14 +44,11 @@ func main() {
 		m: make(map[int]PaymentInfo),
 	}
 
-	// pSlice.AddInfo(info1)
 	pMap.AddInfo(info1)
 
-	// pp.Println("pSlice", pSlice)
 	pp.Println("pMap", pMap)
 
-	// i1 := pSlice.GetInfo(10)
 	i2 := pMap.GetInfo((10))
-	// fmt.Println("i1", i1)
+
 	fmt.Println("i2", i2)
 }
