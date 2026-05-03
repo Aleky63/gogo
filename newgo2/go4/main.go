@@ -1,36 +1,38 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/k0kubun/pp"
 )
 
 type User struct {
-	Name     string
-	Ballance int
+	Name    string
+	Balance int
 }
 
-func Pay(user *User, usd int) bool {
-	if user.Ballance-usd >= 0 {
-		user.Ballance -= usd
-		return true
+func Pay(user *User, usd int) error {
+	if user.Balance-usd < 0 {
+		return errors.New("-Недостаточно средств")
 	}
-	return false
+
+	user.Balance -= usd
+	return nil
 }
 
 func main() {
 	user := User{
-		Name:     "Putler",
-		Ballance: 10,
+		Name:    "Putler",
+		Balance: 10,
 	}
 	pp.Println(user)
-	payed := Pay(&user, 16)
+	err := Pay(&user, 9)
 	pp.Println(user)
 
-	if payed {
-		fmt.Println("оплатили")
+	if err != nil {
+		fmt.Println(" НЕ оплатили", err.Error())
 	} else {
-		fmt.Println(" НЕ оплатили")
+		fmt.Println(" оплатили")
 	}
 }
