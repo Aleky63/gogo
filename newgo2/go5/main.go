@@ -12,6 +12,7 @@ func mine(transferPoint chan int, n int) {
 	fmt.Println("Поход в шахту номер", n, "закончился  ...")
 
 	transferPoint <- 10
+	fmt.Println("Поход  номер", n, "передал уголь  ...")
 }
 
 func main() {
@@ -26,11 +27,12 @@ func main() {
 	go mine(transferPoint, 4)
 
 	coal += <-transferPoint
+	time.Sleep(2 * time.Second)
 	coal += <-transferPoint
+	time.Sleep(2 * time.Second)
 	coal += <-transferPoint
+	time.Sleep(2 * time.Second)
 	coal += <-transferPoint
-
-	time.Sleep(1 * time.Second)
 
 	fmt.Println("Добыли", coal, "угля")
 	fmt.Println(time.Since(initTime))
