@@ -26,7 +26,7 @@ func main() {
 				Text:   "Redhead",
 			}
 
-			time.Sleep(5 * time.Second)
+			time.Sleep(10 * time.Second)
 
 		}
 	}()
@@ -38,7 +38,7 @@ func main() {
 				Text:   "Mole",
 			}
 
-			time.Sleep(1000 * time.Millisecond)
+			time.Sleep(1 * time.Second)
 
 		}
 	}()
