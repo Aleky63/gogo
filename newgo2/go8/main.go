@@ -13,14 +13,14 @@ var (
 	green = color.New(color.FgHiGreen).SprintFunc()
 )
 
-func foo(ctx context.Context) {
+func foo(ctx context.Context, n int) {
 	for {
 		select {
 		case <-ctx.Done():
-			fmt.Println("endEnd_foo")
+			fmt.Println("endEnd_foo", n)
 			return
 		default:
-			fmt.Println(red("maksim"))
+			fmt.Println(red("maksim", n))
 		}
 
 		time.Sleep(1 * time.Second)
@@ -34,7 +34,7 @@ func boo(ctx context.Context) {
 			fmt.Println("endEnd_boo")
 			return
 		default:
-			fmt.Println("kat")
+			fmt.Println(green("kat"))
 		}
 
 		time.Sleep(1 * time.Second)
@@ -45,14 +45,17 @@ func main() {
 	parentContext, parentCancel := context.WithCancel(context.Background())
 	childContext, childCancel := context.WithCancel(parentContext)
 
-	go foo(parentContext)
+	go foo(parentContext, 1)
+	go foo(parentContext, 2)
+	go foo(parentContext, 3)
+	go foo(parentContext, 4)
 	go boo(childContext)
 
-	time.Sleep(3 * time.Second)
+	time.Sleep(1 * time.Second)
 	childCancel()
-	time.Sleep(6 * time.Second)
+	time.Sleep(3 * time.Second)
 	parentCancel()
 
 	time.Sleep(1 * time.Second)
-	fmt.Println(green("END😍END😍END😍END😍END"))
+	fmt.Println("END😍END😍END😍END😍END")
 }
