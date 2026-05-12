@@ -1,4 +1,4 @@
-module go10
+module go11
 
 go 1.25.1
 
