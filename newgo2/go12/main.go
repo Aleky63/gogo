@@ -40,6 +40,6 @@ func main() {
 		wg.Add(1)
 		go getLikes(wg)
 	}
-	fmt.Println(red("TIME:", time.Since(initNime)))
+	fmt.Println(red("Time :", time.Since(initNime)))
 	wg.Wait()
 }
