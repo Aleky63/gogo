@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import "go13/miner"
 
 func main() {
-	fmt.Println("hello")
+	coalTransferPoint := miner.Foo()
+	for v := range coalTransferPoint {
+	}
 }

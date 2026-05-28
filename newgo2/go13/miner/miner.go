@@ -3,10 +3,18 @@ package miner
 import (
 	"context"
 	"fmt"
+	"sync"
 	"time"
 )
 
-func Miner(transferPoint chan<- int, n int, power int) {
+func Miner(
+	ctx context.Context,
+	wg *sync.WaitGroup,
+	transferPoint chan<- int,
+	n int,
+	power int,
+) {
+	defer wg.Done()
 	for {
 		select {
 		case <-ctx.Done():
@@ -24,10 +32,19 @@ func Miner(transferPoint chan<- int, n int, power int) {
 	}
 }
 
-func foo(ctx context.Context, minerCount int) chan int {
+func Foo(ctx context.Context, minerCount int) <-chan int {
 	coalTransferPoint := make(chan int)
+
+	wg := &sync.WaitGroup{}
 	for i := 0; i <= minerCount; i++ {
+		wg.Add(1)
 		go Miner(ctx, coalTransferPoint, i, i*11)
 	}
+
+	go func() {
+		wg.Wait()
+		close(coalTransferPoint)
+	}()
+
 	return coalTransferPoint
 }
