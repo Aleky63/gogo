@@ -32,7 +32,7 @@ func Miner(
 	}
 }
 
-func Foo(ctx context.Context, minerCount int) <-chan int {
+func MinerPool(ctx context.Context, minerCount int) <-chan int {
 	coalTransferPoint := make(chan int)
 
 	wg := &sync.WaitGroup{}
