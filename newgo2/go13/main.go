@@ -3,6 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"sync"
+	"sync/atomic"
+	"time"
 
 	"go13/miner"
 	"go13/postman"
@@ -11,41 +14,55 @@ import (
 )
 
 func main() {
-	var coal int
+	yellow := color.New(color.FgYellow).SprintFunc()
+	red := color.New(color.FgRed).SprintFunc()
+
+	var coal atomic.Int64
+
+	mtx := sync.Mutex{}
 	var mails []string
 
 	minerContext, minerCancel := context.WithCancel(context.Background())
 	postmanContext, postmanCancel := context.WithCancel(context.Background())
 
-	coalTransferPoint := miner.MinerPool(minerContext, 2)
+	go func() {
+		time.Sleep(2 * time.Second)
 
-	mailTransferPoint := postman.PostmanPool(postmanContext, 2)
+		minerCancel()
+	}()
+	go func() {
+		time.Sleep(5 * time.Second)
+		fmt.Println("<<<--------------Working day postman the  is over----------")
+		postmanCancel()
+	}()
 
-	isCoalClosed := false
-	isMailClosed := false
+	coalTransferPoint := miner.MinerPool(minerContext, 5)
 
-	for !isCoalClosed || !isMailClosed {
-		select {
-		case c, ok := <-coalTransferPoint:
+	mailTransferPoint := postman.PostmanPool(postmanContext, 5)
 
-			if !ok {
-				isCoalClose = true
-				continue
-			}
-			coal += c
+	wg := &sync.WaitGroup{}
 
-		case m, ok := <-mailTransferPoint:
-			if !ok {
-
-				isMailClosed = true
-				continue
-			}
-			mails = append(mails, m)
-
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for v := range coalTransferPoint {
+			coal.Add(int64(v))
 		}
-	}
-	red := color.New(color.FgRed).SprintFunc()
-	fmt.Println(red("total coal produced:", coal))
-	yellow := color.New(color.FgYellow).SprintFunc()
+	}()
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		for v := range mailTransferPoint {
+			mtx.Lock()
+			mails = append(mails, v)
+			mtx.Unlock()
+		}
+	}()
+
+	wg.Wait()
+
+	fmt.Println(red("total coal produced:", coal.Load()))
+	mtx.Lock()
 	fmt.Println(yellow("total number of letters received:", len(mails)))
+	mtx.Unlock()
 }

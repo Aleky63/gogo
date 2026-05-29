@@ -25,20 +25,20 @@ func Postman(
 			fmt.Println("I'm a postman number:", n, "took the letter")
 			time.Sleep(1 * time.Second)
 
-			fmt.Println("I'm a postman number:", n, "delivered the letter to the post officeЖ", mail)
+			fmt.Println("I'm a postman number:", n, "delivered the letter to the post office", mail)
 			transferPoint <- mail
 			fmt.Println("I'm a postman number:", n, "handed over the letter", mail)
 		}
 	}
 }
 
-func postmanPool(ctx context.Context, postmanCount int) <-chan string {
+func PostmanPool(ctx context.Context, postmanCount int) <-chan string {
 	mailTransferPoint := make(chan string)
 
 	wg := &sync.WaitGroup{}
-	for i := 0; i <= postmanCount; i++ {
+	for i := 1; i <= postmanCount; i++ {
 		wg.Add(1)
-		go Postman(ctx, mailTransferPoint, i, postmanToMail(i))
+		go Postman(ctx, wg, mailTransferPoint, i, postmanToMail(i))
 	}
 
 	go func() {
@@ -58,7 +58,7 @@ func postmanToMail(postmanNumber int) string {
 
 	mail, ok := ptm[postmanNumber]
 	if !ok {
-		return lotto
+		return "lotto"
 	}
 	return mail
 }

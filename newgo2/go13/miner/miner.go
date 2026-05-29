@@ -36,9 +36,9 @@ func MinerPool(ctx context.Context, minerCount int) <-chan int {
 	coalTransferPoint := make(chan int)
 
 	wg := &sync.WaitGroup{}
-	for i := 0; i <= minerCount; i++ {
+	for i := 1; i <= minerCount; i++ {
 		wg.Add(1)
-		go Miner(ctx, coalTransferPoint, i, i*11)
+		go Miner(ctx, wg, coalTransferPoint, i, i*11)
 	}
 
 	go func() {
