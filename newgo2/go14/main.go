@@ -36,7 +36,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("ERROOOOOOOR:", err.Error())
 	} else {
-		fmt.Println("OK_____________________OK")
+		fmt.Println("OK___________________OK")
 	}
 }
 
