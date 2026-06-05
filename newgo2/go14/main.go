@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/fatih/color"
 )
@@ -36,7 +37,24 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println("ERROOOOOOOR:", err.Error())
 	} else {
-		fmt.Println("OK___________________OK")
+		fmt.Println("OK_________🎈_____OK")
+	}
+}
+
+func handlerProba(w http.ResponseWriter, r *http.Request) {
+	_, err := w.Write([]byte("Hello,Eysk!!!🦀🦀🦀"))
+	if err != nil {
+		fmt.Println("err:", err.Error())
+	}
+}
+
+func handlerSleep(w http.ResponseWriter, r *http.Request) {
+	time.Sleep(5 * time.Second)
+	_, err := w.Write([]byte("HTTP respons!!!🐩🐈‍⬛🐩"))
+	if err != nil {
+		fmt.Println("err:", err.Error())
+	} else {
+		fmt.Println("Sleep🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️🤦‍♀️")
 	}
 }
 
@@ -44,6 +62,9 @@ func main() {
 	http.HandleFunc("/default", handler)
 	http.HandleFunc("/pay", payHandler)
 	http.HandleFunc("/cancel", cancelHandler)
+
+	http.HandleFunc("/", handlerProba)
+	http.HandleFunc("/sleep", handlerSleep)
 
 	magenta := color.New(color.FgHiMagenta).SprintFunc()
 	fmt.Println(magenta("hello"))
@@ -54,3 +75,6 @@ func main() {
 	}
 	fmt.Println("Закончили")
 }
+
+// www.youtube.com/watch?v=4xST8IWJFZc
+// 07.22
