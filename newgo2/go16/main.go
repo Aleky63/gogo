@@ -6,13 +6,12 @@ import (
 	"net/http"
 	"strconv"
 	"sync"
-	"sync/atomic"
 )
 
 var (
 	mtx   = sync.Mutex{}
-	money = atomic.Int64{}
-	bank  = atomic.Int64{}
+	money = 1000
+	bank  = 0
 )
 
 func payHandler(w http.ResponseWriter, r *http.Request) {
@@ -29,10 +28,10 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	mtx.Lock()
-	if money.Load()-int64(paymentAmount) >= 0 {
+	if money-paymentAmount >= 0 {
 
-		money.Add(int64(-paymentAmount))
-		fmt.Println("ОПЛАТА УСПЕШНО ПРОШЛА:", money.Load())
+		money -= -paymentAmount
+		fmt.Println("ОПЛАТА УСПЕШНО ПРОШЛА:", money)
 	} else {
 		fmt.Println("ОПЛАТА не прошла не хватает денег")
 	}
@@ -53,11 +52,11 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 
 	}
 	mtx.Lock()
-	if money.Load() >= int64(saveAmount) {
-		money.Add(int64(-saveAmount))
-		bank.Add(int64(saveAmount))
-		fmt.Println("Деньги УСПЕШНО прошли в банк:", money.Load())
-		fmt.Println("Новое значение денег на счете", bank.Load())
+	if money >= saveAmount {
+		money -= saveAmount
+		bank += saveAmount
+		fmt.Println("Деньги УСПЕШНО прошли в банк:", money)
+		fmt.Println("Новое значение денег на счете", bank)
 	} else {
 		fmt.Println("Не хватает денег положить на счет.")
 	}
@@ -65,7 +64,6 @@ func saveHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	money.Add(1000)
 	http.HandleFunc("/pay", payHandler)
 	http.HandleFunc("/save", saveHandler)
 
