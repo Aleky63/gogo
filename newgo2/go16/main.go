@@ -17,60 +17,125 @@ var (
 func payHandler(w http.ResponseWriter, r *http.Request) {
 	httpRequestBody, err := io.ReadAll(r.Body)
 	if err != nil {
-		fmt.Println("fail to read HTTP Body!", err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		msg := "fail to read HTTP Body!" + err.Error()
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 		return
 	}
 	httpRequestBodyString := string(httpRequestBody)
+
 	paymentAmount, err := strconv.Atoi(httpRequestBodyString)
 	if err != nil {
-		fmt.Println("fail to read HTTP body  to intereger!", err.Error())
+		w.WriteHeader(http.StatusBadRequest)
+		msg := "fail to convert HTTP body to integer!" + err.Error()
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 		return
 	}
 
 	mtx.Lock()
-	if money-paymentAmount >= 0 {
+	defer mtx.Unlock()
 
-		money -= -paymentAmount
-		fmt.Println("ОПЛАТА УСПЕШНО ПРОШЛА:", money)
+	if money >= paymentAmount {
+		money -= paymentAmount
+		msg := "ОПЛАТА УСПЕШНО ПРОШЛА! Остаток на счете: " + strconv.Itoa(money)
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 	} else {
-		fmt.Println("ОПЛАТА не прошла не хватает денег")
+		msg := "Недостаточно средств! Доступно: " + strconv.Itoa(money)
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 	}
-	mtx.Unlock()
 }
 
 func saveHandler(w http.ResponseWriter, r *http.Request) {
 	httpRequestBody, err := io.ReadAll(r.Body)
 	if err != nil {
-		fmt.Println("fail to read HTTP requet body!", err.Error())
+		msg := "fail to read HTTP request body!" + err.Error()
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 		return
 	}
+
 	httpRequestBodyString := string(httpRequestBody)
+
 	saveAmount, err := strconv.Atoi(httpRequestBodyString)
 	if err != nil {
-		fmt.Println("fail to convert HTTP body  to intereger!", err.Error())
+		msg := "fail to convert HTTP body to integer!" + err.Error()
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 		return
-
 	}
+
 	mtx.Lock()
+	defer mtx.Unlock()
+
 	if money >= saveAmount {
+		// Переводим деньги со счета в банк
 		money -= saveAmount
 		bank += saveAmount
-		fmt.Println("Деньги УСПЕШНО прошли в банк:", money)
-		fmt.Println("Новое значение денег на счете", bank)
+
+		msg := "ДЕНЬГИ ПЕРЕВЕДЕНЫ В БАНК! Остаток на счете: " + strconv.Itoa(money)
+		fmt.Println(msg)
+
+		msgbank := "Накопления в банке: " + strconv.Itoa(bank)
+		fmt.Println(msgbank)
+
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
+		_, err = w.Write([]byte("\n" + msgbank))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 	} else {
-		fmt.Println("Не хватает денег положить на счет.")
+		msg := "Недостаточно денег на счете для перевода! Доступно: " + strconv.Itoa(money)
+		fmt.Println(msg)
+		_, err = w.Write([]byte(msg))
+		if err != nil {
+			fmt.Println("fail to write HTTP response", err)
+		}
 	}
-	mtx.Unlock()
 }
 
 func main() {
 	http.HandleFunc("/pay", payHandler)
 	http.HandleFunc("/save", saveHandler)
 
+	fmt.Println("========================================")
+	fmt.Println("🚀 Сервер запущен на http://localhost:9091")
+	fmt.Println("========================================")
+	fmt.Println("Доступные операции:")
+	fmt.Println("  POST /pay  - списать деньги (уменьшает money)")
+	fmt.Println("  POST /save - перевести деньги в банк (money -> bank)")
+	fmt.Println("========================================")
+	fmt.Println("Примеры запросов:")
+	fmt.Println("  curl -X POST -d \"500\" http://localhost:9091/save")
+	fmt.Println("  curl -X POST -d \"300\" http://localhost:9091/pay")
+	fmt.Println("========================================")
+
 	err := http.ListenAndServe(":9091", nil)
 	if err != nil {
-		fmt.Println("HTTP server error!", err.Error())
+		fmt.Println("❌ HTTP server error!", err.Error())
 	}
-
-	fmt.Println("hello")
 }
