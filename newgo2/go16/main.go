@@ -15,6 +15,11 @@ var (
 )
 
 func payHandler(w http.ResponseWriter, r *http.Request) {
+	for k, v := range r.Header {
+		fmt.Println("k:", k, "--v:", v)
+	}
+	fmt.Println("Http method:", r.Method)
+
 	httpRequestBody, err := io.ReadAll(r.Body)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
