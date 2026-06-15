@@ -85,10 +85,26 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func defaultHandler(w http.ResponseWriter, r *http.Request) {
+	fooParam := r.URL.Query().Get("foo")
+	booParam := r.URL.Query().Get("boo")
+	fmt.Println("Получены параметры:", fooParam, booParam)
+	response := map[string]interface{}{
+		"foo":     fooParam,
+		"boo":     booParam,
+		"message": "Обработчик /default вызван",
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
 func main() {
 	http.HandleFunc("/pay", payHandler)
+	http.HandleFunc("/default", defaultHandler)
 
+	fmt.Println("Сервер запущен на порту :9091")
 	if err := http.ListenAndServe(":9091", nil); err != nil {
-		fmt.Println("Ошибка во время работы HTTP сервера:", err)
+		fmt.Println("Ошибка запуска HTTP сервера:", err)
 	}
 }
