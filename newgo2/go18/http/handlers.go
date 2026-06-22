@@ -1,7 +1,11 @@
 package http
 
 import (
+	"encoding/json"
+	"errors"
+	"fmt"
 	"net/http"
+	"time"
 
 	"restapi/todo"
 )
@@ -28,6 +32,52 @@ func NewHTTPHandlers(todoList *todo.List) *HTTPHandlers {
 // -response body:JSON with error - time *
 
 func (h *HTTPHandlers) HandleCreateTask(w http.ResponseWriter, r *http.Request) {
+	var taskDTO TaskDTO
+
+	if err := json.NewDecoder(r.Body).Decode(&taskDTO); err != nil {
+
+		errDTO := ErrorDTO{
+			Message: err.Error(),
+			Time:    time.Now(),
+		}
+
+		http.Error(w, errDTO.ToString(), http.StatusBadRequest)
+		return
+
+	}
+
+	if err := taskDTO.ValidateForCreate(); err != nil {
+		errDTO := ErrorDTO{
+			Message: err.Error(),
+			Time:    time.Now(),
+		}
+		http.Error(w, errDTO.ToString(), http.StatusBadRequest)
+
+	}
+
+	todoTask := todo.NewTask(taskDTO.Title, taskDTO.Description)
+	if err := h.todoList.AddTask(todoTask); err != nil {
+		errDTO := ErrorDTO{
+			Message: err.Error(),
+			Time:    time.Now(),
+		}
+		if errors.Is(err, todo.ErrTaskAlreadyExists) {
+			http.Error(w, errDTO.ToString(), http.StatusConflict)
+		} else {
+			http.Error(w, errDTO.ToString(), http.StatusInternalServerError)
+		}
+
+		return
+	}
+	b, err := json.MarshalIndent(todoTask, "", "    ")
+	if err != nil {
+		panic(err)
+	}
+	w.WriteHeader(http.StatusCreated)
+	if _, err := w.Write(b); err != nil {
+		fmt.Println("failed to write http response:", err)
+		return
+	}
 }
 
 // *
@@ -58,8 +108,42 @@ func (h *HTTPHandlers) HandleGetTask(w http.ResponseWriter, r *http.Request) {
 func (h *HTTPHandlers) HandleGetAllTasks(w http.ResponseWriter, r *http.Request) {
 }
 
+// *
+// pattern: /tasks&copleted=true
+// method: GET
+// info: query params
+// succeed:
+// -status code : 200 Ok
+// -response body:JSON represented found tasks
+// failed:
+//  -status code : 400,500,...
+// -response body:JSON with error - time *
+func (h *HTTPHandlers) HandleGetAllUncomletedTasks(w http.ResponseWriter, r *http.Request) {
+}
+
+// *
+// pattern: /tasks/{title}
+// method: PATCH
+// info: pattern + JSON in HTTP request body
+// succeed:
+// -status code : 200 Ok
+// -response body:JSON represented changed tasks
+// failed:
+//  -status code : 400,409,500,...
+// -response body:JSON with error - time *
+
 func (h *HTTPHandlers) HandleCompleteTask(w http.ResponseWriter, r *http.Request) {
 }
 
+// *
+// pattern: /tasks/{title}
+// method: DELETE
+// info: pattern
+// succeed:
+// -status code : 204 No Content
+// -response body:-
+// failed:
+//  -status code : 400,409,500,...
+// -response body:JSON with error - time *
 func (h *HTTPHandlers) HandleDeleteTask(w http.ResponseWriter, r *http.Request) {
 }
