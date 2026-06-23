@@ -10,6 +10,9 @@ type TaskDTO struct {
 	Title       string
 	Description string
 }
+type CompleteTaskDTO struct {
+	Complete bool
+}
 
 func (t TaskDTO) ValidateForCreate() error {
 	if t.Title == "" {

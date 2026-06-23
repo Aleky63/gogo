@@ -7,6 +7,14 @@ type List struct {
 	mtx   sync.RWMutex
 }
 
+func (l *List) ListNotCompletedTasks() any {
+	panic("unimplemented")
+}
+
+func (l *List) ListTasks() any {
+	panic("unimplemented")
+}
+
 func NewList() *List {
 	return &List{
 		tasks: make(map[string]Task),
@@ -38,19 +46,6 @@ func (l *List) GetTask(title string) (Task, error) {
 	return task, nil
 }
 
-func (l *List) ListTasks() map[string]Task {
-	l.mtx.RLock()
-	defer l.mtx.RUnlock()
-
-	tmp := make(map[string]Task, len(l.tasks))
-
-	for k, v := range l.tasks {
-		tmp[k] = v
-	}
-
-	return tmp
-}
-
 func (l *List) ListUncompletedTasks() map[string]Task {
 	l.mtx.RLock()
 	defer l.mtx.RUnlock()
@@ -66,7 +61,7 @@ func (l *List) ListUncompletedTasks() map[string]Task {
 	return uncompletedTasks
 }
 
-func (l *List) CompleteTask(title string) (Task, error) {
+func (l *List) CompleteTask(title string) error {
 	l.mtx.Lock()
 	defer l.mtx.Unlock()
 
@@ -82,7 +77,7 @@ func (l *List) CompleteTask(title string) (Task, error) {
 	return task, nil
 }
 
-func (l *List) UncompleteTask(title string) (Task, error) {
+func (l *List) UncompleteTask(title string) error {
 	l.mtx.Lock()
 	defer l.mtx.Unlock()
 
