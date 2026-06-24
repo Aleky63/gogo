@@ -11,10 +11,6 @@ func (l *List) ListNotCompletedTasks() any {
 	panic("unimplemented")
 }
 
-func (l *List) ListTasks() any {
-	panic("unimplemented")
-}
-
 func NewList() *List {
 	return &List{
 		tasks: make(map[string]Task),
@@ -46,6 +42,19 @@ func (l *List) GetTask(title string) (Task, error) {
 	return task, nil
 }
 
+func (l *List) ListTasks() map[string]Task {
+	l.mtx.RLock()
+	defer l.mtx.RUnlock()
+
+	tmp := make(map[string]Task, len(l.tasks))
+
+	for k, v := range l.tasks {
+		tmp[k] = v
+	}
+
+	return tmp
+}
+
 func (l *List) ListUncompletedTasks() map[string]Task {
 	l.mtx.RLock()
 	defer l.mtx.RUnlock()
@@ -67,14 +76,14 @@ func (l *List) CompleteTask(title string) error {
 
 	task, ok := l.tasks[title]
 	if !ok {
-		return Task{}, ErrTaskNotFound
+		return ErrTaskNotFound
 	}
 
 	task.Complete()
 
 	l.tasks[title] = task
 
-	return task, nil
+	return nil
 }
 
 func (l *List) UncompleteTask(title string) error {
@@ -83,14 +92,14 @@ func (l *List) UncompleteTask(title string) error {
 
 	task, ok := l.tasks[title]
 	if !ok {
-		return Task{}, ErrTaskNotFound
+		return ErrTaskNotFound
 	}
 
 	task.Uncomplete()
 
 	l.tasks[title] = task
 
-	return task, nil
+	return nil
 }
 
 func (l *List) DeleteTask(title string) error {

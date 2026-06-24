@@ -2,18 +2,16 @@ package main
 
 import (
 	"fmt"
-	"net/http"
+
+	"restapi/http"
+	"restapi/todo"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r.URL.Path)
-}
-
 func main() {
-	http.HandleFunc("/tasks/", handler)
-
-	if err := http.ListenAndServe(":9091", nil); err != nil {
-		fmt.Println("err:", err)
+	todoList := todo.NewList()
+	HTTPHandlers := http.NewHTTPHandlers(todoList)
+	httpServer := http.NewHTTPServer(HTTPHandlers)
+	if err := httpServer.StartServer(); err != nil {
+		fmt.Println("failed to start http server:", err)
 	}
-	fmt.Println("hello")
 }
