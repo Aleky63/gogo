@@ -70,20 +70,20 @@ func (l *List) ListUncompletedTasks() map[string]Task {
 	return uncompletedTasks
 }
 
-func (l *List) CompleteTask(title string) error {
+func (l *List) CompleteTask(title string) (Task, error) {
 	l.mtx.Lock()
 	defer l.mtx.Unlock()
 
 	task, ok := l.tasks[title]
 	if !ok {
-		return ErrTaskNotFound
+		return Task{}, ErrTaskNotFound
 	}
 
 	task.Complete()
 
 	l.tasks[title] = task
 
-	return nil
+	return l.tasks[title], nil
 }
 
 func (l *List) UncompleteTask(title string) error {
