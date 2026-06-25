@@ -201,7 +201,11 @@ func (h *HTTPHandlers) HandleCompleteTask(w http.ResponseWriter, r *http.Request
 	if completeDTO.Complete {
 		changedTask, err = h.todoList.CompleteTask(title)
 	} else {
-		changedTask, err = h.todoList.UncompleteTask(title)
+		err = h.todoList.UncompleteTask(title)
+		if err == nil {
+			// Получаем задачу заново
+			changedTask, err = h.todoList.GetTask(title)
+		}
 	}
 
 	if err != nil {
