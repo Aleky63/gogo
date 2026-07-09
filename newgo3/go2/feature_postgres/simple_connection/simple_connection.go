@@ -7,15 +7,7 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func CheckConnection() {
-	ctx := context.Background()
-	conn, err := pgx.Connect(ctx, "postgres://postgres:1803@localhost:5432/postgres")
-	if err != nil {
-		panic(err)
-	}
-
-	if err := conn.Ping(ctx); err != nil {
-		panic(err)
-	}
+func CheckConnection(ctx context.Context) (*pgx.Conn, error) {
 	fmt.Println("The connection to the database was successful!🛠️")
+	return pgx.Connect(ctx, "postgres://postgres:1803@localhost:5432/postgres")
 }
