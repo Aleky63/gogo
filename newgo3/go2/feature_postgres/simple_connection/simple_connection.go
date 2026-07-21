@@ -8,5 +8,5 @@ import (
 )
 
 func CheckConnection(ctx context.Context) (*pgx.Conn, error) {
-	fmt.Println("The connection to the database was successful!🛠️")
+	fmt.Println("The connection to the database was successful!")
 	return pgx.Connect(ctx, "postgres://postgres:1803@localhost:5432/postgres")
