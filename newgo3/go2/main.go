@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 
 	"study/feature_postgres/simple_connection"
 	"study/feature_postgres/simple_sql"
@@ -13,5 +14,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	simple_sql.CreateTable(ctx, conn)
+	if err := simple_sql.CreateTable(ctx, conn); err != nil {
+		panic(err)
+	}
+	fmt.Println("The table in the database has been created successfully!")
 }
