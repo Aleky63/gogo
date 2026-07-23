@@ -17,5 +17,5 @@ func main() {
 	if err := simple_sql.CreateTable(ctx, conn); err != nil {
 		panic(err)
 	}
-	fmt.Println("The table in the database has been created successfully!")
+	fmt.Println("The table in the database has been created successfully!🛠️🛠️🛠️🛠️🛠️")
 }
