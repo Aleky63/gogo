@@ -6,6 +6,8 @@ import (
 
 	"study/feature_postgres/simple_connection"
 	"study/feature_postgres/simple_sql"
+
+	"github.com/fatih/color"
 )
 
 func main() {
@@ -18,9 +20,21 @@ func main() {
 		panic(err)
 	}
 
-	if err := simple_sql.InsertRow(ctx, conn); err != nil {
+	// if err := simple_sql.InsertRow(
+	// 	ctx,
+	// 	conn,
+	// 	"Lunch-new",
+	// 	"Need to eat",
+	// 	false,
+	// 	time.Now(),
+	// ); err != nil {
+	// 	panic(err)
+	// }
+
+	if err := simple_sql.UpdateRow(ctx, conn); err != nil {
 		panic(err)
 	}
 
-	fmt.Println("🛠️🛠️- Succeed!-🛠️🛠️")
+	red := color.New(color.FgRed).SprintFunc()
+	fmt.Println(red("🛠️🛠️- Succeed!-🛠️🛠️"))
 }
