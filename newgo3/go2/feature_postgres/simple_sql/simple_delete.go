@@ -6,12 +6,12 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func UpdateRow(ctx context.Context, conn *pgx.Conn) error {
+func DeletetRow(ctx context.Context,
+	conn *pgx.Conn,
+) error {
 	sqlQuery := `
-	UPDATE  tasks
-	
-	SET description  = '😍'
-	WHERE completed = FALSE;
+DELETE FROM  tasks
+	WHERE id=9;
 	
 	
 	`

@@ -35,6 +35,10 @@ func main() {
 		panic(err)
 	}
 
+	// if err := simple_sql.DeletetRow(ctx, conn); err != nil {
+	// 	panic(err)
+	// }
+
 	red := color.New(color.FgRed).SprintFunc()
 	fmt.Println(red("🛠️🛠️- Succeed!-🛠️🛠️"))
 }
