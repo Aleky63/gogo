@@ -20,7 +20,7 @@ func InsertRow(ctx context.Context,
 	description ,
 	completed ,
 	created_at )
-	 VALUES ($1,$2,$3,$4		);`
+	 VALUES ($1,$2,$3,$4);`
 
 	_, err := conn.Exec(ctx, sqlQuery, title, description, completed, created_at)
 
