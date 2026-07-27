@@ -17,7 +17,7 @@ func InsertRow(ctx context.Context,
 	description ,
 	completed ,
 	created_at )
-	 VALUES ($1,$2,$3,$4);`
+	 VALUES ($1,$2,$3,$4)`
 
 	_, err := conn.Exec(
 		ctx,
@@ -25,7 +25,7 @@ func InsertRow(ctx context.Context,
 		 task.Title, 
 		 task.Description,
 		 task.Completed,
-		  task.CreatedAt,		 ,
+		  task.CreatedAt,	
 
 		)
 
