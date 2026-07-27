@@ -2,15 +2,11 @@ package simple_sql
 
 import (
 	"context"
-	"time"
 
 	"github.com/jackc/pgx/v5"
 )
 
-func InsertRow(ctx context.Context,
-	conn *pgx.Conn,
-	task,TaTaskModel,
-) error {
+func InsertRow(ctx context.Context, conn *pgx.Conn, task TaskModel) error {
 	sqlQuery := `
 	INSERT INTO tasks (
 		title ,
@@ -21,13 +17,12 @@ func InsertRow(ctx context.Context,
 
 	_, err := conn.Exec(
 		ctx,
-		 sqlQuery, 
-		 task.Title, 
-		 task.Description,
-		 task.Completed,
-		  task.CreatedAt,	
-
-		)
+		sqlQuery,
+		task.Title,
+		task.Description,
+		task.Completed,
+		task.CreatedAt,
+	)
 
 	return err
 }
