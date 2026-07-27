@@ -7,11 +7,11 @@ import (
 )
 
 func DeletetRow(ctx context.Context,
-	conn *pgx.Conn,
+	conn *pgx.Conn, task []int,
 ) error {
 	sqlQuery := `
 DELETE FROM  tasks
-	WHERE id=9;
+	WHERE id = ANY($1);
 	
 	
 	`

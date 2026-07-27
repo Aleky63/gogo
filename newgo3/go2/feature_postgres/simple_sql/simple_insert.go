@@ -9,10 +9,7 @@ import (
 
 func InsertRow(ctx context.Context,
 	conn *pgx.Conn,
-	title string,
-	description string,
-	completed bool,
-	created_at time.Time,
+	task,TaTaskModel,
 ) error {
 	sqlQuery := `
 	INSERT INTO tasks (
@@ -22,7 +19,15 @@ func InsertRow(ctx context.Context,
 	created_at )
 	 VALUES ($1,$2,$3,$4);`
 
-	_, err := conn.Exec(ctx, sqlQuery, title, description, completed, created_at)
+	_, err := conn.Exec(
+		ctx,
+		 sqlQuery, 
+		 task.Title, 
+		 task.Description,
+		 task.Completed,
+		  task.CreatedAt,		 ,
+
+		)
 
 	return err
 }

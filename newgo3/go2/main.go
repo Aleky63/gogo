@@ -8,6 +8,7 @@ import (
 	"study/feature_postgres/simple_sql"
 
 	"github.com/fatih/color"
+	"github.com/k0kubun/pp"
 )
 
 func main() {
@@ -38,10 +39,12 @@ func main() {
 	// if err := simple_sql.DeletetRow(ctx, conn); err != nil {
 	// 	panic(err)
 	// }
-	if err := simple_sql.SelectRows(ctx, conn); err != nil {
+	tasks, err := simple_sql.SelectRows(ctx, conn)
+	if err != nil {
 		panic(err)
 	}
 
 	red := color.New(color.FgRed).SprintFunc()
 	fmt.Println(red("🛠️🛠️- Succeed!-🛠️🛠️"))
+	pp.Println(tasks)
 }
