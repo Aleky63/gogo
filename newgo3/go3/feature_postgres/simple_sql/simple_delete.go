@@ -1,0 +1,21 @@
+package simple_sql
+
+import (
+	"context"
+
+	"github.com/jackc/pgx/v5"
+)
+
+func DeletetRow(ctx context.Context,
+	conn *pgx.Conn, task []int,
+) error {
+	sqlQuery := `
+DELETE FROM  tasks
+	WHERE id = ANY($1);
+	
+	
+	`
+	_, err := conn.Exec(ctx, sqlQuery)
+
+	return err
+}
