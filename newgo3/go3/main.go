@@ -48,7 +48,7 @@ func main() {
 	for _, task := range tasks {
 		if task.ID == 7 {
 
-			task.Title = " TRAMP😊😊😊😊😊"
+			task.Title = " TRAMP😊"
 			task.Description = "The red-haired horseradish is weird"
 			task.Completed = true
 			now := time.Now()
