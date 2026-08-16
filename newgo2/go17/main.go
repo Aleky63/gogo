@@ -37,7 +37,7 @@ func (p Payment) Println() {
 
 var (
 	mtx            = sync.Mutex{}
-	money          = 1000
+	money          = 3000
 	paymentHistory = make([]Payment, 0)
 )
 
