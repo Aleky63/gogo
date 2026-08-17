@@ -22,8 +22,8 @@ type Payment struct {
 }
 
 func (p Payment) Println() {
-	magenta := color.New(color.FgHiMagenta).SprintFunc()
-	fmt.Println(magenta("================="))
+	blue := color.New(color.FgHiBlue).SprintFunc()
+	fmt.Println(blue("================="))
 
 	fmt.Println("Description:", p.Description)
 	fmt.Println("USD:", p.USD)
@@ -32,7 +32,11 @@ func (p Payment) Println() {
 	fmt.Println("Array:", p.Array)
 	fmt.Println("Bool:", p.Bool)
 
-	fmt.Println(magenta("================="))
+	fmt.Println(blue("================="))
+}
+
+func blue(s string) any {
+	panic("unimplemented")
 }
 
 var (
