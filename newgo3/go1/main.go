@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	fmt.Println("hello")
+	fmt.Println("hello 46644545")
 	feature1.Feature1()
 	feature2.Feature2()
 }
