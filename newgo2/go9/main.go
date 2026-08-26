@@ -19,7 +19,7 @@ func postman(text string, wg *sync.WaitGroup) {
 func main() {
 	var wg sync.WaitGroup
 
-	fmt.Println("hello")
+	fmt.Println("hello_😍😍😍😍😍😍😍😍😍")
 
 	wg.Add(3)
 	go postman("PRABDA", &wg)
