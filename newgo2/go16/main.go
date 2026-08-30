@@ -50,7 +50,7 @@ func payHandler(w http.ResponseWriter, r *http.Request) {
 
 	if money >= paymentAmount {
 		money -= paymentAmount
-		msg := "ОПЛАТА УСПЕШНО ПРОШЛА! Остаток на счете: " + strconv.Itoa(money)
+		msg := "ОПЛАТА УСПЕШНО ПРОШЛА! 🤣🤣🤣🤣🤣Остаток на счете: " + strconv.Itoa(money)
 		fmt.Println(msg)
 		_, err = w.Write([]byte(msg))
 		if err != nil {
