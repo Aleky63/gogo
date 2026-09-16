@@ -22,7 +22,7 @@ func main() {
 	go func() {
 		for {
 			messadeChan1 <- Message{
-				Author: "Tramp🤣🤣🤣🤣🤣",
+				Author: "Tramp🤣",
 				Text:   "Redhead",
 			}
 
