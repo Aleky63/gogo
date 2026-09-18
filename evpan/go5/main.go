@@ -20,7 +20,6 @@ func supplier(ordersChan chan<- Order) {
 }
 
 func warehouse(ordersChan <-chan Order, resultsChan chan<- string) {
-
 	stock := 101
 
 	for order := range ordersChan {
@@ -50,5 +49,5 @@ func main() {
 	for msg := range resultsChan {
 		fmt.Println(msg)
 	}
-	fmt.Println("\u2705 Все заказы обработаны. Программа завершена.❤️")
+	fmt.Println(" Все заказы обработаны. Программа завершена.❤️")
 }
