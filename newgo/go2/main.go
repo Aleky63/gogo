@@ -21,9 +21,9 @@ func main() {
 
 	score2 := false
 	if !score2 {
-		fmt.Println("DDDDDDDDDDDс❤️")
+		fmt.Println("D😍😍❤️")
 	} else {
-		fmt.Println("iiiiiiiiiiii")
+		fmt.Println("iiiiiiii")
 	}
 
 	for i := 1; i < 7; i++ {
