@@ -30,5 +30,5 @@ func foo(n *int) {
 
 	fmt.Println(n)
 	fmt.Println(*n)
-	*n = 5555
+	*n = 55
 }
