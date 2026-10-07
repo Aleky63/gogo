@@ -10,7 +10,7 @@ import (
 
 var (
 	red   = color.New(color.FgHiRed).SprintFunc()
-	green = color.New(color.FgHiGreen).SprintFunc()
+	magenta = color.New(color.FgHiMagenta).SprintFunc()
 )
 
 func foo(ctx context.Context, n int) {
@@ -34,7 +34,7 @@ func boo(ctx context.Context) {
 			fmt.Println("endEnd_boo")
 			return
 		default:
-			fmt.Println(green("kat"))
+			fmt.Println(magenta("kat"))
 		}
 
 		time.Sleep(1 * time.Second)
