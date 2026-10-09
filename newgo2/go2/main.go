@@ -53,7 +53,7 @@ func (m *PaymentModuleWithMap) GetInfo(id int) PaymentInfo {
 func main() {
 	info1 := PaymentInfo{
 		ID:          10,
-		Description: "Kasha",
+		Description: "🧮🛠️😊🤸🏾Kasha",
 		Usd:         5,
 		Cancelled:   false,
 	}
