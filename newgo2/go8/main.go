@@ -57,5 +57,5 @@ func main() {
 	parentCancel()
 
 	time.Sleep(1 * time.Second)
-	fmt.Println("END😍END😍END😍END😍END")
+	fmt.Println("END😍END😍END😍END")
 }
