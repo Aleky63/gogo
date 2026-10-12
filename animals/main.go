@@ -23,7 +23,7 @@ func main() {
 	}
 
 	fmt.Println(red("Мой кот:", myCat.Name))
-	fmt.Println(red("Мой пес:", myDog.Name))
+	fmt.Println(red("Мой песик:", myDog.Name))
 
 	var feedToCat int = 2
 	var feedToDog int = 7
