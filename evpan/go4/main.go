@@ -25,7 +25,7 @@ func main() {
 	fmt.Println("Сотрудники наняты, офис работает...")
 
 	// Даём им время выполнить задачи
-	time.Sleep(8 * time.Second)
+	time.Sleep(40 * time.Second)
 
 	fmt.Println("Офис закрывается, все сотрудники завершают работу.")
 }
