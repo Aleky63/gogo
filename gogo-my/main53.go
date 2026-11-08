@@ -7,16 +7,16 @@ type Cat struct{}
 type Bird struct{}
 
 func (Dog) Speak() string {
-	return "Ggggggggg"
+	return "Ggggggjlllllllggg"
 }
 func (Dog) Growl() string {
-	return "Rrrrrrrr"
+	return "Rrrryyuyuyrrrr"
 }
 func (Cat) Speak() string {
 	return "Mmmmmmy"
 }
 func (Bird) Speak() string {
-	return "Kyyyyy"
+	return "Kyynjkjkjkyyy"
 }
 
 func main53() {
