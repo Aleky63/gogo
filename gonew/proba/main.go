@@ -41,6 +41,6 @@ func main() {
 			Name: "ASSSSSSS",
 		},
 	}
-	acc.SetName("ROOOOOOO")
+	acc.SetName("ROOOOаппппппппппппппппппппOOO")
 	fmt.Printf(" %#v\n", acc)
 }

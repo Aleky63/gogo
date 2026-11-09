@@ -21,7 +21,7 @@ func main() {
 }
 func aboba(a, b, c int) string {
 
-	red := color.New(color.FgHiRed).SprintFunc()
+	yellow := color.New(color.FgHiYellow).SprintFunc()
 	sum := a + b + c
 	return "Sum: " + red(sum)
 
