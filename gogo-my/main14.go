@@ -17,7 +17,7 @@ func PrintReplaced(str string){
 }
 func main14() {
     
-    testStr := "Привет, улыбка!"
+    testStr := "Привет, улыбка !"
     
     PrintReplaced(testStr)
 }
