@@ -63,6 +63,6 @@ func main() {
 
 	red := color.New(color.FgRed).SprintFunc()
 	fmt.Println(red("-----------------------"))
-	fmt.Println(red("🛠️🛠️- Succeed!-🛠️🛠️"))
+	fmt.Println(red("🛠️- Succeed!-🛠️"))
 	pp.Println(tasks)
 }
